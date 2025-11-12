@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.Navbar"
+    >
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- 🔹 TOP HORIZONTAL STEPPER -->
+        <ScrollView Orientation="Horizontal"
+                    BackgroundColor="#E6F2E6"
+                    Padding="10"
+                    Grid.Row="0">
+
+            <HorizontalStackLayout Spacing="20"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start">
+
+                <!-- Step 1 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step1Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="Orange"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="1"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Application"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 2 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step2Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="2"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="DPR"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 3 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step3Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="3"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Score Card"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 4 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step4Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="4"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Upload Docs"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 5 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step5Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="5"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Final Submission"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 6 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step6Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="6"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Under Process"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2" WidthRequest="40" VerticalOptions="Center" BackgroundColor="Gray"/>
+
+                <!-- Step 7 -->
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Frame x:Name="Step7Circle"
+                           WidthRequest="40" HeightRequest="40"
+                           CornerRadius="20"
+                           BackgroundColor="LightGray"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped" CommandParameter="7"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="Loan Sanction"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- 🔹 FORM CONTAINER -->
+        <ContentView x:Name="FormContainer"
+                     Grid.Row="1"
+                     Padding="10"/>
+    </Grid>
+</ContentView>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.Homedashboard"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="{StaticResource Green}"
+             Shell.TitleColor="White"
+             Shell.ForegroundColor="White"
+             Title="Homedashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10">
+
+            <!-- ===== Top Banner Section ===== -->
+            <Grid HeightRequest="250">
+
+                <!-- Background Carousel -->
+                <CarouselView x:Name="bannerCarousel"
+                              IndicatorView="bannerIndicators"
+                              Loop="True"
+                              IsBounceEnabled="True"
+                              ItemsSource="{Binding BannerImages}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Aspect="AspectFill"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <!-- Static Modi Image Overlay -->
+                <Image Source="modi.png"
+                       Aspect="AspectFit"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       Margin="10"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       ZIndex="1"/>
+
+                <!-- Indicators -->
+                <IndicatorView x:Name="bannerIndicators"
+                               IndicatorColor="LightGray"
+                               SelectedIndicatorColor="{StaticResource Green}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               Margin="0,5"/>
+            </Grid>
+
+            <!-- ===== Grid with 4 Cards ===== -->
+            <Grid Padding="10" RowSpacing="15" ColumnSpacing="15" BackgroundColor="LightGray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Card 1 -->
+                <Frame Grid.Row="0" Grid.Column="0"
+                       CornerRadius="8"
+                       Padding="0"
+                       BackgroundColor="White"
+                       HeightRequest="200"
+                       WidthRequest="180">
+                    <Grid RowDefinitions="*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnNewUnitTapped"/>
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="8" Padding="15"
+                                             HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image  Source="map.png" HeightRequest="60" WidthRequest="60"/>
+                            <Label Text="Applicant for New Unit"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Green}"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="4" BackgroundColor="Orange"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Card 2 -->
+                <Frame Grid.Row="0" Grid.Column="1"
+                       CornerRadius="8"
+                       Padding="0"
+                       BackgroundColor="White"
+                       HeightRequest="200"
+                       WidthRequest="180">
+                    <Grid RowDefinitions="*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRegisteredApplicantTapped"/>
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="8" Padding="15"
+                                             HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="login.png" HeightRequest="60" WidthRequest="60"/>
+                            <Label Text="Register Applicant"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Green}"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="4" BackgroundColor="Orange"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Card 3 -->
+                <Frame Grid.Row="1" Grid.Column="0"
+                       CornerRadius="8"
+                       Padding="0"
+                       BackgroundColor="White"
+                       HeightRequest="200"
+                       WidthRequest="180">
+                    <Grid RowDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="8" Padding="15"
+                                             HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="gift_present_5113.png" HeightRequest="60" WidthRequest="60"/>
+                            <Label Text="Application for Existing Units (2nd Loan)"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Green}"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="4" BackgroundColor="Orange"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Card 4 -->
+                <Frame Grid.Row="1" Grid.Column="1"
+                       CornerRadius="8"
+                       Padding="0"
+                       BackgroundColor="White"
+                       HeightRequest="200"
+                       WidthRequest="180">
+                    <Grid RowDefinitions="*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRegisteredApplicantTappedd"/>
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="8" Padding="15"
+                                             HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="login.png" HeightRequest="60" WidthRequest="60"/>
+                            <Label Text="Registered Applicant Login"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Green}"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="4" BackgroundColor="Orange"/>
+                    </Grid>
+                </Frame>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

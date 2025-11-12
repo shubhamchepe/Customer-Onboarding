@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.RegisterApplicantDashboard"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+              Shell.NavBarIsVisible="True"
+              Shell.BackgroundColor="{StaticResource Green}"
+              Shell.TitleColor="White"
+              Shell.ForegroundColor="White"
+             Title="RegisterApplicantDashboard">
+    <Grid RowDefinitions="Auto,*">
+        <!-- 🔹 TOP HORIZONTAL STEPPER -->
+        <ScrollView Orientation="Horizontal"
+           BackgroundColor="#E6F2E6"
+           HeightRequest="80"
+           Padding="10">
+
+            <HorizontalStackLayout Spacing="30">
+
+
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step1Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="Orange"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Application"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step2Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="DPR"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step3Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Score Card"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step4Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step5Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step6Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step7Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Frame x:Name="Step8Circle"
+          WidthRequest="40"
+          HeightRequest="40"
+          CornerRadius="20"
+          BackgroundColor="LightGray"
+          HasShadow="False"
+          HorizontalOptions="Center"
+          VerticalOptions="Center">
+
+                        <Grid>
+                            <Image Source="right.png"
+                  WidthRequest="20"
+                  HeightRequest="20"
+                  Aspect="AspectFit"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload"
+          FontSize="12"
+          FontAttributes="Bold"
+          HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+
+            </HorizontalStackLayout>
+        </ScrollView>
+
+
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout x:Name="ExpanderContainer" Padding="10" Spacing="10">
+
+                <!-- Basic Information -->
+                <toolkit:Expander   x:Name="basicInfoExpander" IsExpanded="True" ExpandedChanged="OnExpanderChanged">
+                    <!--<toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Part 1: PMEGP Initial Application" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>-->
+                    <toolkit:Expander.Header>
+                        <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                <Label Text="Part 1: PMEGP Initial Application" FontAttributes="Bold"/>
+                                <Image x:Name="basicInfoArrow"
+                       Source="upload.png"
+                       WidthRequest="20"
+                       HeightRequest="20"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End" />
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- Aadhar -->
+                            <Entry Placeholder="Adhar Card No.*" />
+                            <Button Text="VALIDATE ADHAR" BackgroundColor="{StaticResource Green}" TextColor="White"/>
+
+                            <!-- PAN -->
+                            <Entry Placeholder="Pan No.*" />
+
+                            <!-- Title -->
+                            <Label Text="Title"/>
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>Select title</x:String>
+                                    <x:String>Mrs.</x:String>
+                                    <x:String>Miss</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <!-- Applicant Name -->
+                            <Entry Placeholder="Name of Applicant*" />
+                            <Label Text="(Name as per Adhar card)" TextColor="{StaticResource Green}" FontSize="12"/>
+
+                            <!-- DOB -->
+                            <DatePicker />
+                            <Entry Placeholder="Date Of Birth*" />
+
+                            <!-- Age -->
+                            <Entry Placeholder="Age" Keyboard="Numeric" />
+
+                            <!-- Gender -->
+                            <Label Text="Gender"/>
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>Select Gender</x:String>
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                    <x:String>Other</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <!-- Social Category -->
+                            <Label Text="Social Category*"/>
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>Select Social Category</x:String>
+                                    <x:String>OBC</x:String>
+                                    <x:String>SC</x:String>
+                                    <x:String>ST</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <!-- Special Category -->
+                            <Label Text="Special Category (if any)*"/>
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>Select Special Category</x:String>
+                                    <x:String>Ex-Serviceman</x:String>
+                                    <x:String>Disabled</x:String>
+                                    <x:String>Minority</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <!-- Qualification -->
+                            <Label Text="Qualification*"/>
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>Select Qualification</x:String>
+                                    <x:String>12th Pass</x:String>
+                                    <x:String>Graduate</x:String>
+                                    <x:String>Post Graduate</x:String>
+                                    <x:String>Other</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                <!-- Communication Address -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Communication Address" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+                            <Entry Placeholder="Communication address*" />
+                            <Label Text="Select State*" />
+                            <Picker SelectedIndex="0">
+                                <Picker.Items>
+                                    <x:String>--Select state--</x:String>
+                                    <x:String>Maharashtra</x:String>
+                                    <x:String>Gujarat</x:String>
+                                    <x:String>Rajasthan</x:String>
+                                    <x:String>Other</x:String>
+                                </Picker.Items>
+                            </Picker>
+                            <Entry Placeholder="District*" />
+                            <Button Text="CHANGE DISTRICT"
+                          BackgroundColor="{StaticResource Green}"
+                          TextColor="White"
+                          CornerRadius="5"/>
+                            <Entry Placeholder="Taluka/Block*" />
+                            <Entry Placeholder="Pin*" Keyboard="Numeric"/>
+                            <Entry Placeholder="Primary Mobile Number*" Keyboard="Telephone"/>
+                            <Entry Placeholder="Secondary Mobile Number" Keyboard="Telephone"/>
+                            <Entry Placeholder="Email*" Keyboard="Email"/>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                <!-- Implementing Agency -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Implementing Agency" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <!-- Scrollable Form Content -->
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <Label Text="Implementing Agency*" />
+                            <Picker Title="--Select Agency--">
+                                <!-- Add Items Here -->
+                            </Picker>
+
+                            <Label Text="State*" />
+                            <Picker Title="--Select state--">
+                                <!-- Add States -->
+                            </Picker>
+
+                            <Label Text="District*" />
+                            <Picker >
+                                <!-- Add States -->
+                            </Picker>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+                <!-- Unit Address -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Unit Address" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <!-- Scrollable content -->
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- District -->
+                            <Label Text="District*" />
+                            <Picker Title="Select District">
+                                <!-- Add Districts -->
+                            </Picker>
+
+                            <!-- Sub District -->
+                            <Label Text="Sub District*" />
+                            <Picker Title="Select Sub District">
+                                <!-- Add Sub Districts -->
+                            </Picker>
+
+                            <!-- Village -->
+                            <Label Text="Village*" />
+                            <Picker Title="Select Village">
+                                <!-- Add Villages -->
+                            </Picker>
+
+                            <!-- LGD Code -->
+                            <Entry Placeholder="LGD Code*" />
+
+                            <!-- Pin -->
+                            <Entry Placeholder="Pin*" Keyboard="Numeric" />
+
+                            <!-- Unit Location -->
+                            <Entry Placeholder="Unit Location*" />
+
+                            <!-- Unit Address -->
+                            <Editor Placeholder="Unit Address*" AutoSize="TextChanges" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+                <!-- Project Information -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Project Information" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <!-- Scrollable Content -->
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- Type of Activity -->
+                            <Label Text="Type Of Activity*" />
+                            <Picker Title="--Select Agency--">
+                                <!-- Add agencies here -->
+                            </Picker>
+
+                            <!-- Industry Selection Buttons -->
+                            <Label Text="Kindly select at least one Industry/Activity" TextColor="Red" />
+                            <HorizontalStackLayout Spacing="10">
+                                <Button Text="SELECT INDUSTRY/ACTIVITY" BackgroundColor="{StaticResource Green}" TextColor="White"/>
+                                <Button Text="NIC CODE LIST" BackgroundColor="{StaticResource Green}" TextColor="White"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Table Header -->
+                            <Grid BackgroundColor="White" Padding="5" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr No" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="NIC Code" Grid.Column="1" FontAttributes="Bold" />
+                                <Label Text="Product Description" Grid.Column="2" FontAttributes="Bold" />
+                                <Label Text="Action" Grid.Column="3" FontAttributes="Bold" />
+                            </Grid>
+
+                            <!-- Orange Line Under Header -->
+                            <BoxView HeightRequest="2"
+                           Color="Orange"
+                           HorizontalOptions="FillAndExpand"
+                           Margin="0,2,0,2"/>
+
+
+                            <!-- EDP Training -->
+                            <Label Text="Have you completed EDP Training?*" />
+                            <HorizontalStackLayout Spacing="20">
+                                <RadioButton Content="Yes" GroupName="EDPTraining"/>
+                                <RadioButton Content="No" GroupName="EDPTraining" IsChecked="True"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Cost Section -->
+                            <Label Text="Cost" FontAttributes="Bold" />
+
+                            <Entry Placeholder="Capital Expenditure*" />
+                            <Label Text="Rupees zero only" FontSize="12" TextColor="Gray"/>
+
+                            <Entry Placeholder="Working Capital*" />
+                            <Label Text="Rupees zero only" FontSize="12" TextColor="Gray"/>
+
+                            <Entry Placeholder="Total" />
+                            <Label Text="Rupees zero only" FontSize="12" TextColor="Gray"/>
+
+                            <Entry Placeholder="No of Employees" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+                <!-- Primary Financing Bank -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Primary Financing Bank" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <StackLayout Padding="10" Spacing="12">
+                        <Picker Title="Bank Name"/>
+                        <Entry Placeholder="IFSC/Bank Code*" />
+                        <Button Text="SELECT BANK IFSC CODE AND ADDRESS"
+              BackgroundColor="{StaticResource Green}"
+              TextColor="White" />
+                        <Entry Placeholder="Branch Name*" />
+                        <Entry Placeholder="Address" />
+                        <Entry Placeholder="District" />
+                    </StackLayout>
+                </toolkit:Expander>
+
+                <!-- Alternate Financing Bank -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Alternate Financing Bank" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <StackLayout Padding="10" Spacing="12">
+                        <Picker Title="Bank Name"/>
+                        <Entry Placeholder="IFSC/Bank Code*" />
+                        <Button Text="2ND FINANCING BRANCH IFSC CODE"
+              BackgroundColor="{StaticResource Green}"
+              TextColor="White" />
+                        <Entry Placeholder="Branch Name*" />
+                        <Entry Placeholder="Address" />
+                        <Entry Placeholder="District" />
+                    </StackLayout>
+                </toolkit:Expander>
+
+
+
+                <!-- Other Information -->
+                <toolkit:Expander ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Other Information" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Spacing="15" Padding="10">
+
+                        <!-- CGTMSE Question -->
+                        <Label Text="Want to avail CGTMSE*" />
+                        <HorizontalStackLayout>
+                            <RadioButton Content="Yes" GroupName="CGTMSE"/>
+                            <RadioButton Content="No" GroupName="CGTMSE"/>
+                        </HorizontalStackLayout>
+
+                        <!-- PMEGB Info -->
+                        <Label Text="Where did you hear about PMEGP" />
+                        <Picker Title="--Select Information Source--">
+                            <Picker.Items>
+                                <x:String>Newspaper</x:String>
+                                <x:String>Social Media</x:String>
+                                <x:String>KVIC Office</x:String>
+                                <x:String>Other</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+                <!-- Agreement Checkbox -->
+                <Grid ColumnDefinitions="Auto,*" Padding="5">
+                    <!-- Checkbox -->
+                    <CheckBox Grid.Column="0"
+            VerticalOptions="Start"
+                         Color="{StaticResource Green}"
+            HorizontalOptions="Start" />
+
+                    <!-- Agreement Text -->
+                    <Label Grid.Column="1"
+         Text="1. I hereby voluntarily and explicitly consent to the sharing of my Aadhaar and PAN details with KVIC and MoMSME. I understand that these details will be used solely for PMEGP Loan Purpose, and I confirm that all information shared is accurate to the best of my knowledge. I acknowledge that I have been informed about the purpose of sharing these details and agree to the same. Also, I will not shift my Unit till the Physical Verification is completed."
+         FontSize="12"
+         LineBreakMode="WordWrap"
+         VerticalOptions="Center"
+         HorizontalOptions="Start" />
+                </Grid>
+
+                <!-- update btn Button -->
+
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

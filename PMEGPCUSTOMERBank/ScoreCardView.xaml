@@ -1,0 +1,1100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="PMEGPCUSTOMERBank.ScoreCardView"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Frame BorderColor="#FF9800" CornerRadius="8" Margin="10" Padding="15">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+          ColumnDefinitions="Auto,*"
+          ColumnSpacing="10">
+
+                    <Label Text="Name :" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ApplName}" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="Applicant ID :" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
+                    <Label Text="{Binding ApplCode}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="Total Mark :" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
+                    <Label x:Name="Total" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Percentage :" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
+                    <Label TextColor="red" x:Name="Percentange" Grid.Row="3" Grid.Column="1" />
+                </Grid>
+            </Frame>
+
+            <!-- Part 2 Heading -->
+            <Label Text="Part 2: Score Card"
+       FontSize="16"
+       FontAttributes="Bold"
+       BackgroundColor="#D7E3D0"
+       Padding="10,5"
+
+       TextColor="Black" />
+
+
+            <!-- Note -->
+            <Label Text="⚠️ Note: Document file size should not be more than 1MB"
+                       FontSize="12"
+                       Padding="14,8"
+                       TextColor="Red"
+                          Margin="0,10,0,0"
+                       BackgroundColor="#FFF3E0" />
+            
+            
+
+            <!-- Accordions 1 -->
+            <toolkit:Expander IsExpanded="True"  Margin="0,10,0,0">
+                <toolkit:Expander.Header>
+                    <Frame BackgroundColor="#2E7D32" Padding="10" Margin="0,2,0,0">
+                        <Label Text="1. Personal Details (In case of non-individual details of main promoter to be captured)" 
+                           TextColor="White" FontAttributes="Bold" />
+                    </Frame>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+
+                    <!-- ✅ FIX: Wrap all content inside ONE container -->
+                    <VerticalStackLayout  Margin="0,10,0,0" Spacing="10">
+
+                        <!-- Score Parameters Frame -->
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Applicant's Age"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       Padding="14,6"
+                                       BackgroundColor="#E8F5E9"
+                                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="ScoreParametersList" 
+                ItemsLayout="VerticalList" 
+                ItemsSource="{Binding ScoreParametersCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        CornerRadius="22"
+                        HeightRequest="38"
+                        FontSize="13"
+                        WidthRequest="100"
+                        IsVisible="{Binding IsUpload}"
+                        />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="No. of dependencies"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Padding="14,6"
+                       BackgroundColor="#E8F5E9"
+                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="NOofDependencis" 
+                                    ItemsLayout="VerticalList" 
+                                    ItemsSource="{Binding NoOfDependencies}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Owning a house/parental house"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Padding="14,6"
+                       BackgroundColor="#E8F5E9"
+                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="OwningAhouse" 
+                                    ItemsLayout="VerticalList" 
+                                    ItemsSource="{Binding OwningAhouseCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Residing at the same address / location"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Padding="14,6"
+                       BackgroundColor="#E8F5E9"
+                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="ResidingAtTheSameAddress" 
+                                    ItemsLayout="VerticalList" 
+                                    ItemsSource="{Binding ResidingAtTheSameAddressCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Academic Qualifications"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Padding="14,6"
+                       BackgroundColor="#E8F5E9"
+                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="AcademicQualifications" 
+                                    ItemsLayout="VerticalList" 
+                                    ItemsSource="{Binding AcademicQualificationsCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Experience in the line of trade"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Padding="14,6"
+                       BackgroundColor="#E8F5E9"
+                       TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="ExperienceLineOfTrade" 
+                                    ItemsLayout="VerticalList" 
+                                    ItemsSource="{Binding ExperienceLineOfTradeCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Any other source of income including family"
+    FontSize="16"
+    FontAttributes="Bold"
+    Padding="14,6"
+    BackgroundColor="#E8F5E9"
+    TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="AnyotherSourceofIncom" 
+                 ItemsLayout="VerticalList" 
+                 ItemsSource="{Binding AnyotherSourceofIncomeCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                 BackgroundColor="#2E7D32"
+                                 TextColor="White"
+                                 CornerRadius="22"
+                                 HeightRequest="38"
+                                 FontSize="13"
+                                 WidthRequest="100"
+                                 IsVisible="{Binding IsUpload}"
+                                 />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Assessed for Income Tax"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Padding="14,6"
+                                BackgroundColor="#E8F5E9"
+                                TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="AnyotherSourceofIncome" 
+             ItemsLayout="VerticalList" 
+             ItemsSource="{Binding AssessedForIncomeTaxCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                             BackgroundColor="#2E7D32"
+                             TextColor="White"
+                             CornerRadius="22"
+                             HeightRequest="38"
+                             FontSize="13"
+                             WidthRequest="100"
+                             IsVisible="{Binding IsUpload}"
+                             />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Having Life Insurance policy (PMSBY, PMJJBY, APY or any other insurance policy)"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="HavingLifeInsurancePolicy" 
+                                ItemsLayout="VerticalList" 
+                                ItemsSource="{Binding HavingLifeInsurancePolicyCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                CornerRadius="22"
+                HeightRequest="38"
+                FontSize="13"
+                WidthRequest="100"
+                IsVisible="{Binding IsUpload}"
+                />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+                    </VerticalStackLayout>
+                </toolkit:Expander.Content>
+
+
+            </toolkit:Expander>
+
+
+            <!-- Accordions 2 -->
+            <toolkit:Expander IsExpanded="True"  Margin="0,10,0,0">
+                <toolkit:Expander.Header>
+                    <Frame BackgroundColor="#2E7D32" Padding="10" Margin="0,2,0,0">
+                        <Label Text="2. New Venture / Firm" 
+                           TextColor="White" FontAttributes="Bold" />
+                    </Frame>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+
+                    <!-- ✅ FIX: Wrap all content inside ONE container -->
+                    <VerticalStackLayout  Margin="0,10,0,0"  Spacing="10">
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Relationship with lending bank ( Opening Date of Bank Account) (dd-mmm-yyyy)"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Padding="14,6"
+                                   BackgroundColor="#E8F5E9"
+                                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="RelationshipwithlendingBank" 
+                ItemsLayout="VerticalList" 
+                ItemsSource="{Binding RelationshipwithlendingBankCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Credit History"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Padding="14,6"
+                                   BackgroundColor="#E8F5E9"
+                                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="CreditHistory" 
+                ItemsLayout="VerticalList" 
+                ItemsSource="{Binding CreditHistoryCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Location Advantage (availability of infrastructure, raw materials, labour, proximity to markets etc.)"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Padding="14,6"
+                                   BackgroundColor="#E8F5E9"
+                                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="LocationAdvantage" 
+                ItemsLayout="VerticalList" 
+                ItemsSource="{Binding LocationAdvantageCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                                    BackgroundColor="#2E7D32"
+                                                    TextColor="White"
+                                                    CornerRadius="22"
+                                                    HeightRequest="38"
+                                                    FontSize="13"
+                                                    WidthRequest="100"
+                                                    IsVisible="{Binding IsUpload}"
+                                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Skill Certification Course / RSETI / ITS / Computer knowledge"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="SkillCertificationCourse" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding SkillCertificationCourseCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                    BackgroundColor="#2E7D32"
+                                    TextColor="White"
+                                    CornerRadius="22"
+                                    HeightRequest="38"
+                                    FontSize="13"
+                                    WidthRequest="100"
+                                    IsVisible="{Binding IsUpload}"
+                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Marketing Tie ups for sale of products"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="Marketing" 
+                                ItemsLayout="VerticalList" 
+                                ItemsSource="{Binding MarketingCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                    BackgroundColor="#2E7D32"
+                                    TextColor="White"
+                                    CornerRadius="22"
+                                    HeightRequest="38"
+                                    FontSize="13"
+                                    WidthRequest="100"
+                                    IsVisible="{Binding IsUpload}"
+                                    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Line of Activity"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Padding="14,6"
+                                BackgroundColor="#E8F5E9"
+                                TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="LineofActivity" 
+             ItemsLayout="VerticalList" 
+             ItemsSource="{Binding LineofActivityCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                 BackgroundColor="#2E7D32"
+                 TextColor="White"
+                 CornerRadius="22"
+                 HeightRequest="38"
+                 FontSize="13"
+                 WidthRequest="100"
+                 IsVisible="{Binding IsUpload}"
+                 />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Registered with Govt. authorities viz for sales Tax/Vat/licence from local bodies/shop act etc."
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="GovtAuthorities" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding GovtAuthoritiesCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+    BackgroundColor="#2E7D32"
+    TextColor="White"
+    CornerRadius="22"
+    HeightRequest="38"
+    FontSize="13"
+    WidthRequest="100"
+    IsVisible="{Binding IsUpload}"
+    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Repayment period (not applicable for only working capital loans)."
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="Repaymentperiod" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding RepaymentperiodCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+    BackgroundColor="#2E7D32"
+    TextColor="White"
+    CornerRadius="22"
+    HeightRequest="38"
+    FontSize="13"
+    WidthRequest="100"
+    IsVisible="{Binding IsUpload}"
+    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Employment Generation"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="EmploymentGeneration" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding EmploymentGenerationCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+    BackgroundColor="#2E7D32"
+    TextColor="White"
+    CornerRadius="22"
+    HeightRequest="38"
+    FontSize="13"
+    WidthRequest="100"
+    IsVisible="{Binding IsUpload}"
+    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Avg. DSCR (not applicable for working capital loans)"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="DSCR" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding DSCRCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+    BackgroundColor="#2E7D32"
+    TextColor="White"
+    CornerRadius="22"
+    HeightRequest="38"
+    FontSize="13"
+    WidthRequest="100"
+    IsVisible="{Binding IsUpload}"
+    />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+
+                    </VerticalStackLayout>
+                </toolkit:Expander.Content>
+
+
+            </toolkit:Expander>
+
+
+
+
+
+            <toolkit:Expander IsExpanded="True"  Margin="0,10,0,0">
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#2E7D32" Padding="10" Margin="0,2,0,0">
+                            <Label Text="3. Security(Under CGTMSE/CGFMU/CGSSI)" 
+                           TextColor="White" FontAttributes="Bold" />
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                    <VerticalStackLayout  Margin="0,10,0,0"  Spacing="10">
+
+
+                        <Frame BorderColor="#2E7D32" CornerRadius="14" Padding="0" BackgroundColor="White">
+                            <VerticalStackLayout  Margin="0,10,0,0" Spacing="0">
+
+                                <!-- Sub-heading -->
+                                <Label Text="Collateral Securities Coverage:"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Padding="14,6"
+                   BackgroundColor="#E8F5E9"
+                   TextColor="Black" />
+
+                                <!-- Table Header -->
+                                <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,8" BackgroundColor="#F1F8E9">
+                                    <Label Text="Criteria" FontAttributes="Bold" Grid.Column="0" TextColor="#2E7D32" />
+                                    <Label Text="Marks" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Select" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                    <Label Text="Upload Document" FontAttributes="Bold" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="#2E7D32" />
+                                </Grid>
+
+                                <BoxView HeightRequest="2" BackgroundColor="#FF9800" Margin="0,0,0,8" />
+
+                                <CollectionView x:Name="Collateral" 
+ItemsLayout="VerticalList" 
+ItemsSource="{Binding CollateralCollection }">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="2*,*,*,2*" Padding="14,12">
+                                                <Label Text="{Binding ScrCriteria}" Grid.Column="0" />
+                                                <Label Text="{Binding MaxMarks}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                                <RadioButton Grid.Column="2" HorizontalOptions="Center"/>
+                                                <Button Text="UPLOAD" Grid.Column="3"
+                                            BackgroundColor="#2E7D32"
+                                            TextColor="White"
+                                            CornerRadius="22"
+                                            HeightRequest="38"
+                                            FontSize="13"
+                                            WidthRequest="100"
+                                            IsVisible="{Binding IsUpload}"
+                                            />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+                    </VerticalStackLayout>
+                </toolkit:Expander.Content>
+                     </toolkit:Expander>
+
+
+
+            <!-- Declaration -->
+            <HorizontalStackLayout Spacing="5" Margin="10,15">
+                <CheckBox />
+                <Label Text="I hereby declare that the details furnished above are 
+                       true and correct to the best of my knowledge and belief..."
+                   FontSize="12"
+                   LineBreakMode="WordWrap"
+                   VerticalOptions="Center"
+                   WidthRequest="300" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

@@ -1,0 +1,30 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PMEGPCUSTOMERBank"
+             x:Class="PMEGPCUSTOMERBank.App"
+             UserAppTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Colors -->
+            <Color x:Key="Green">#FF216B32</Color>
+            <Color x:Key="LightGreen">#CDE1D7</Color>
+
+            <Color x:Key="GreenLight">#72C564</Color>
+            <Color x:Key="AccentColor">Orange</Color>
+            <Color x:Key="colorPrimaryDark">#046A38</Color>
+            <Color x:Key="transparentLight">#30111111</Color>
+
+            
+
+
+            <!-- Font Sizes -->
+            <x:Double x:Key="HeadingFontSize">16</x:Double>
+            <x:Double x:Key="BodyFontSize">14</x:Double>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

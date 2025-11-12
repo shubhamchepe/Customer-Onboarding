@@ -1,0 +1,1731 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="PMEGPCUSTOMERBank.DPRView">
+
+    <ScrollView>
+    <VerticalStackLayout Padding="10" Spacing="10">
+            <!-- Expander -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+                   StrokeThickness="0"
+                   BackgroundColor="#DFF0D8"
+                   Padding="10"
+                   StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="PMEGP Application : Detailed Project Report (DPR)" 
+                          FontAttributes="Bold"
+                          FontSize="15"
+                          TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+                <ScrollView Orientation="Horizontal">
+                    <VerticalStackLayout Spacing="0" WidthRequest="500">
+                        <!-- Type of Activity -->
+                        <Label  Text="Type Of Activity" Margin="0,10,0,0" />
+                        <Picker x:Name="schemePicker"
+                           Title="Select Scheme"
+                           ItemDisplayBinding="{Binding SchemeName}" />
+                        <!-- Table Header -->
+                        <Grid ColumnSpacing="1"  Margin="0,10,0,0" RowSpacing="1" BackgroundColor="#f5f5f5" Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Sr No" Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="5"/>
+                            <Label Text="NIC Code" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="5"/>
+                            <Label Text="Product Description" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="5"/>
+                        </Grid>
+
+                        <!-- Orange underline -->
+                        <BoxView HeightRequest="3" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                        <!-- CollectionView -->
+                        <CollectionView x:Name="nicCollection"
+                        ItemsLayout="VerticalList"
+                        ItemSizingStrategy="MeasureAllItems"
+                        WidthRequest="500"
+                        HeightRequest="150"
+                        VerticalOptions="Start">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnSpacing="1" RowSpacing="1" Padding="5" BackgroundColor="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="250"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding SrNo}" Grid.Column="0"/>
+                                        <Label Text="{Binding NICCode}" Grid.Column="1"/>
+                                        <Label Text="{Binding ProductDescription}" Grid.Column="2"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!-- Content of Expander --><!--
+                <VerticalStackLayout Padding="10" Spacing="15">
+
+                    --><!-- Dropdown --><!--
+                    <VerticalStackLayout>
+                        <Label Text="Type of Activity" 
+                          FontAttributes="Bold" 
+                          TextColor="Red"/>
+                        <Picker x:Name="ddlActivity" Title="Select Activity">
+                            <Picker.Items>
+                                <x:String>Service</x:String>
+                                <x:String>Manufacturing</x:String>
+                                <x:String>Trading</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </VerticalStackLayout>
+
+                    --><!-- Section Title --><!--
+                    <Label Text="Name of the project / business activity proposed :" 
+                      FontAttributes="Bold"
+                      FontSize="14"
+                      TextColor="Black"/>
+
+                    --><!-- Whole NIC Table inside one horizontal scroll --><!--
+                    <ScrollView Orientation="Horizontal">
+                        <Grid ColumnSpacing="1" RowSpacing="1" Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+
+                            --><!-- Table Header --><!--
+                            <Label Text="Sr No" Grid.Column="0" FontAttributes="Bold" Padding="5"/>
+                            <Label Text="NIC Code" Grid.Column="1" FontAttributes="Bold" Padding="5"/>
+                            <Label Text="Product Description" Grid.Column="2" FontAttributes="Bold" Padding="5"/>
+
+                            --><!-- CollectionView --><!--
+                            <CollectionView x:Name="nicCollection"
+                        Grid.ColumnSpan="3"
+                        ItemsLayout="VerticalList"
+                        ItemSizingStrategy="MeasureAllItems"
+                        HeightRequest="150" 
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" RowSpacing="1" Padding="5" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="250"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding SrNo}" Grid.Column="0"/>
+                                            <Label Text="{Binding NICCode}" Grid.Column="1"/>
+                                            <Label Text="{Binding ProductDescription}" Grid.Column="2"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </ScrollView>
+
+
+                </VerticalStackLayout>-->
+                
+                
+            </toolkit:Expander>
+
+
+
+            <!-- EXPANDER 2 -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="BUILDING DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+             
+                    <Button Text="➕ Add New Row"
+                    Clicked="AddRow_Clicked"
+                    BackgroundColor="{StaticResource AccentColor}"
+                    TextColor="White"
+                    CornerRadius="8"
+                HorizontalOptions="Start"
+                            
+                    Padding="10,5" />
+
+                    <Label Text="Land :" FontAttributes="Bold" VerticalOptions="Center"/>
+                    <Entry x:Name="LandEntry"
+                   TextColor="Green"
+                   Placeholder="Land"
+                   Margin="6,2"/>
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Area" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Rate/Sq.ft" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="RowsCollection"
+                                ItemsSource="{Binding BuildingRows}"
+                                ItemsLayout="VerticalList"
+                                 HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Frame Grid.Column="0"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="#fafafa"
+                                       CornerRadius="4"
+                                       Padding="4,6"
+                                       HasShadow="False">
+                                                <Label Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+
+                                            <!-- Particulars -->
+                                            <Frame Grid.Column="1"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Particulars}"
+                                           Placeholder="Particulars"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Area -->
+                                            <Frame Grid.Column="2"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Area}"
+                                           Placeholder="Area"
+                                           Keyboard="Numeric"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Rate -->
+                                            <Frame Grid.Column="3"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Rate}"
+                                           Placeholder="Rate/Sq.ft"
+                                           Keyboard="Numeric"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Amount -->
+                                            <Frame Grid.Column="4"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Amount}"
+                                           Placeholder="Amount in Rs."
+                                           IsReadOnly="True"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Delete -->
+                                            <Frame Grid.Column="5"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="#fafafa"
+                                       CornerRadius="4"
+                                       Padding="0"
+                                       HasShadow="False">
+                                     
+
+                                                <Button Text="🗑"
+                                                BackgroundColor="Transparent"
+                                                TextColor="Red"
+                                                CommandParameter="{Binding .}"
+                                                Clicked="DeleteRow_Clicked"/>
+
+                                            </Frame>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                     <Entry Text="00.00"
+                      TextColor="Green"
+                     Placeholder="Enter total amount"
+                     Margin="6,2"/>
+                    </HorizontalStackLayout>
+                 
+
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+
+            <!-- EXPANDER 3: MACHINERY DETAILS -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border StrokeThickness="0"
+                BackgroundColor="#DFF0D8"
+                Padding="10"
+                StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="MACHINERY DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Add Row Button -->
+                    <Button Text="➕ Add New Row"
+                Clicked="AddMachineryRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5"/>
+
+           
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold"/>
+                                <Label Text="Quantity" Grid.Column="2" FontAttributes="Bold"/>
+                                <Label Text="Rate" Grid.Column="3" FontAttributes="Bold"/>
+                                <Label Text="Amount in Rs." Grid.Column="4" FontAttributes="Bold"/>
+                                <Label Text="Del" Grid.Column="5" FontAttributes="Bold"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="MachineryCollection"
+                                ItemsSource="{Binding MachineryRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6" BackgroundColor="White" Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding SrNo}" Grid.Column="0" HorizontalOptions="Center"/>
+                                            <Entry Text="{Binding Particulars}" Grid.Column="1" Margin="6,2"/>
+                                            <Entry Text="{Binding Quantity}" Grid.Column="2" Keyboard="Numeric" Margin="6,2"/>
+                                            <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric" Margin="6,2"/>
+                                            <Entry Text="{Binding Amount}" Grid.Column="4" IsReadOnly="True" Margin="6,2"/>
+                                            <Button Text="🗑" Grid.Column="5"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteMachineryRow_Clicked"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="{Binding MachineryTotal}" 
+                    TextColor="Green" 
+                    Placeholder="Total Amount" 
+                    Margin="6,2"
+                    IsReadOnly="True"/>
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- EXPANDER 3: WORKING CAPITAL DETAILS -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="WORKING CAPITAL DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="WorkingCapitalCollection"
+                                ItemsSource="{Binding WorkingCapitalRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="250"/>
+                                                <ColumnDefinition Width="150"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Frame Grid.Column="0"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="#fafafa"
+                                       CornerRadius="4"
+                                       Padding="4,6"
+                                       HasShadow="False">
+                                                <Label Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+
+                                            <!-- Particulars -->
+                                            <Frame Grid.Column="1"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Particulars}"
+                                           Placeholder="Particulars"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Amount -->
+                                            <Frame Grid.Column="2"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Amount}"
+                                           Placeholder="Amount in Rs."
+                                           Keyboard="Numeric"
+                                           Margin="6,2"/>
+                                            </Frame>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="0.00" 
+                     TextColor="Green" 
+                     Placeholder="Total Amount" 
+                     Margin="6,2"
+                     IsReadOnly="True"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+
+            <!-- EXPANDER 4: Means of Financing  -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text=" Means of Financing"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView 
+                                ItemsSource="{Binding FinancingRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="250"/>
+                                                <ColumnDefinition Width="150"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Frame Grid.Column="0"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="#fafafa"
+                                       CornerRadius="4"
+                                       Padding="4,6"
+                                       HasShadow="False">
+                                                <Label Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+
+                                            <!-- Particulars -->
+                                            <Frame Grid.Column="1"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Particulars}"
+                                           Placeholder="Particulars"
+                                           Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Amount -->
+                                            <Frame Grid.Column="2"
+                                       BorderColor="#ddd"
+                                       BackgroundColor="White"
+                                       CornerRadius="4"
+                                       HasShadow="False"
+                                       Padding="0">
+                                                <Entry Text="{Binding Percentage}"
+                                           Placeholder="Amount in Rs."
+                                           Keyboard="Numeric"
+                                           Margin="6,2"/>
+                                            </Frame>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="0.00" 
+                     TextColor="Green" 
+                     Placeholder="Total Amount" 
+                     Margin="6,2"
+                     IsReadOnly="True"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+
+            <!-- EXPANDER 5 - SALES DETAILS -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="SALES DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <Button Text="➕ Add Sales Row"
+                Clicked="AddSalesRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5" />
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Rate/Unit" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Quantity" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Data Rows -->
+                            <CollectionView x:Name="SalesCollection"
+                                ItemsSource="{Binding SalesRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6" BackgroundColor="White" Margin="0,0,0,1">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- SrNo -->
+                                            <Label Grid.Column="0" Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                            <!-- Particulars -->
+                                            <Entry Grid.Column="1" Text="{Binding Particulars}" Placeholder="Particulars" Margin="6,2"/>
+
+                                            <!-- Rate -->
+                                            <Entry Grid.Column="2" Text="{Binding RatePerUnit}" Keyboard="Numeric" Placeholder="Rate/Unit" Margin="6,2"/>
+
+                                            <!-- Quantity -->
+                                            <Entry Grid.Column="3" Text="{Binding Quantity}" Keyboard="Numeric" Placeholder="Quantity" Margin="6,2"/>
+
+                                            <!-- Amount -->
+                                            <Entry Grid.Column="4" Text="{Binding Amount}" Keyboard="Numeric" Placeholder="Amount" Margin="6,2"/>
+
+                                            <!-- Delete -->
+                                            <Button Grid.Column="5" Text="🗑"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteSalesRow_Clicked"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="00.00"
+                    TextColor="Green"
+                   Placeholder="Enter total amount"
+                   Margin="6,2"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- EXPANDER 6 - RAW MATERIALS -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="RAW MATERIALS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <Button Text="➕ Add Raw Material"
+                Clicked="AddRawMaterialRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5" />
+                    <!-- Orange underline -->
+                    <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                    <!-- Table -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold"/>
+                                <Label Text="Unit" Grid.Column="2" FontAttributes="Bold"/>
+                                <Label Text="Rate/Unit" Grid.Column="3" FontAttributes="Bold"/>
+                                <Label Text="Required Unit" Grid.Column="4" FontAttributes="Bold"/>
+                                <Label Text="Amount" Grid.Column="5" FontAttributes="Bold"/>
+                                <Label Text="Del" Grid.Column="6" FontAttributes="Bold"/>
+                            </Grid>
+
+                            <!-- Data Rows -->
+                            <CollectionView x:Name="RawMaterialsCollection"
+                                ItemsSource="{Binding RawMaterialRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6" BackgroundColor="White" Margin="0,0,0,1">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0" Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Entry Grid.Column="1" Text="{Binding Particulars}" Placeholder="Particulars"/>
+                                            <Entry Grid.Column="2" Text="{Binding Unit}" Keyboard="Numeric"/>
+                                            <Entry Grid.Column="3" Text="{Binding RatePerUnit}" Keyboard="Numeric"/>
+                                            <Entry Grid.Column="4" Text="{Binding RequiredUnit}" Keyboard="Numeric"/>
+                                            <Entry Grid.Column="5" Text="{Binding Amount}" Keyboard="Numeric"/>
+                                            <Button Grid.Column="6" Text="🗑"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteRawMaterialRow_Clicked"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="00.00"
+                    TextColor="Green"
+                   Placeholder="Enter total amount"
+                   Margin="6,2"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- EXPANDER 7 : WAGES -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border StrokeThickness="0"
+                BackgroundColor="#DFF0D8"
+                Padding="10"
+                StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="WAGES DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Add New Row Button -->
+                    <Button Text="➕ Add New Row"
+                Clicked="AddWagesRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5" />
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="No. of Workers" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Wages Per Month (Total Month 12)" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2"
+                         BackgroundColor="{StaticResource AccentColor}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="WagesCollection"
+                                ItemsSource="{Binding WagesRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="60"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Label Grid.Column="0"
+                                       Text="{Binding SrNo}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+
+                                            <!-- Particulars -->
+                                            <Entry Grid.Column="1"
+                                       Text="{Binding Particulars}"
+                                       Placeholder="Particulars"
+                                       Margin="6,2"/>
+
+                                            <!-- No Of Workers -->
+                                            <Entry Grid.Column="2"
+                                       Text="{Binding NoOfWorkers}"
+                                       Placeholder="Workers"
+                                       Keyboard="Numeric"
+                                       Margin="6,2"/>
+
+                                            <!-- Wages Per Month -->
+                                            <Entry Grid.Column="3"
+                                       Text="{Binding WagesPerMonth}"
+                                       Placeholder="Wages/Month"
+                                       Keyboard="Numeric"
+                                       Margin="6,2"/>
+
+                                            <!-- Amount -->
+                                            <Entry Grid.Column="4"
+                                       Text="{Binding Amount}"
+                                       IsReadOnly="True"
+                                       Margin="6,2"/>
+
+                                            <!-- Delete -->
+                                            <Button Grid.Column="5"
+                                        Text="🗑"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteWagesRow_Clicked"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                    <!-- Total -->
+                    <HorizontalStackLayout Margin="0,10,0,0">
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="00.00"
+        TextColor="Green"
+       Placeholder="Enter total amount"
+       Margin="6,2"/>
+                        <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry Text="00.00"
+ TextColor="Green"
+Placeholder="Enter total amount"
+Margin="6,2"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- EXPANDER 8 : SALARY -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border StrokeThickness="0"
+                BackgroundColor="#DFF0D8"
+                Padding="10"
+                StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="SALARY DETAILS"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Add New Row Button -->
+                    <Button Text="➕ Add New Row"
+                Clicked="AddSalaryRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5" />
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="No. of Staff" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Wages Per Month (Total Month 12)" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2"
+                         BackgroundColor="{StaticResource AccentColor}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="SalaryCollection"
+                                ItemsSource="{Binding SalaryRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="60"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Label Grid.Column="0"
+                                       Text="{Binding SrNo}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+
+                                            <!-- Particulars -->
+                                            <Entry Grid.Column="1"
+                                       Text="{Binding Particulars}"
+                                       Placeholder="Particulars"
+                                       Margin="6,2"/>
+
+                                            <!-- No Of Staff -->
+                                            <Entry Grid.Column="2"
+                                       Text="{Binding NoOfStaff}"
+                                       Placeholder="Staff"
+                                       Keyboard="Numeric"
+                                       Margin="6,2"/>
+
+                                            <!-- Wages Per Month -->
+                                            <Entry Grid.Column="3"
+                                       Text="{Binding WagesPerMonth}"
+                                       Placeholder="Wages/Month"
+                                       Keyboard="Numeric"
+                                       Margin="6,2"/>
+
+                                            <!-- Amount -->
+                                            <Entry Grid.Column="4"
+                                       Text="{Binding Amount}"
+                                       IsReadOnly="True"
+                                       Margin="6,2"/>
+
+                                            <!-- Delete -->
+                                            <Button Grid.Column="5"
+                                        Text="🗑"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteSalaryRow_Clicked"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+
+                </VerticalStackLayout>
+            </toolkit:Expander>
+        
+            <!-- EXPANDER 9: WORKING CAPITAL ESTIMATE -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border StrokeThickness="0"
+                BackgroundColor="#DFF0D8"
+                Padding="10"
+                StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="WORKING CAPITAL ESTIMATE"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- Add New Row Button -->
+                    <!--<Button Text="➕ Add New Row"
+                Clicked="AddWorkingCapitalEstimateRow_Clicked"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                CornerRadius="8"
+                HorizontalOptions="Start"
+                Padding="10,5" />-->
+
+                    <!-- Table with Horizontal Scroll -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="No. of Days" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2"
+                         BackgroundColor="{StaticResource AccentColor}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="WorkingCapitalEstimateCollection"
+                                ItemsSource="{Binding WorkingCapitalEstimateRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="250"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="60"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Label Grid.Column="0"
+                                       Text="{Binding SrNo}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+
+                                            <!-- Particulars -->
+                                            <Entry Grid.Column="1"
+                                       Text="{Binding Particulars}"
+                                       Placeholder="Particulars"
+                                       Margin="6,2"/>
+
+                                            <!-- No Of Days -->
+                                            <Entry Grid.Column="2"
+                                       Text="{Binding NoOfDays}"
+                                       Placeholder="Days"
+                                       Keyboard="Numeric"
+                                       Margin="6,2"/>
+
+                                         
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- EXPANDER: 10 Power Estimate Expenditure -->
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="POWER ESTIMATE EXPENDITURE"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+
+                    <Label Text="Power Requirement:" FontAttributes="Bold" VerticalOptions="Center"/>
+                    <Entry x:Name="powerRequirement"
+                   TextColor="Green"
+                   Placeholder="Land"
+                   Margin="6,2"/>
+
+                    <!-- Table Header -->
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout Spacing="0">
+
+                            <Grid ColumnSpacing="1" BackgroundColor="#f5f5f5" Padding="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Cost" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Amount (Rs.)" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Created On" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange underline -->
+                            <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Table Rows -->
+                            <CollectionView x:Name="PowerEstimateCollection"
+                                ItemsSource="{Binding PowerEstimateRows}"
+                                ItemsLayout="VerticalList"
+                                HeightRequest="200"
+                                VerticalOptions="Start">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="1" Padding="6"
+                                  BackgroundColor="White"
+                                  Margin="0,0,0,1">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No -->
+                                            <Frame Grid.Column="0" BorderColor="#ddd" BackgroundColor="#fafafa" CornerRadius="4" Padding="4,6" HasShadow="False">
+                                                <Label Text="{Binding SrNo}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+
+                                            <!-- Particulars -->
+                                            <Frame Grid.Column="1" BorderColor="#ddd" BackgroundColor="White" CornerRadius="4" HasShadow="False" Padding="0">
+                                                <Entry Text="{Binding Particulars}" Placeholder="Particulars" Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- Cost -->
+                                            <Frame Grid.Column="2" BorderColor="#ddd" BackgroundColor="White" CornerRadius="4" HasShadow="False" Padding="0">
+                                                <Entry Text="{Binding Cost}" Placeholder="Cost" Keyboard="Numeric" Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- AmountInRs -->
+                                            <Frame Grid.Column="3" BorderColor="#ddd" BackgroundColor="White" CornerRadius="4" HasShadow="False" Padding="0">
+                                                <Entry Text="{Binding AmountInRs}" Placeholder="Amount in Rs." IsReadOnly="True" Margin="6,2"/>
+                                            </Frame>
+
+                                            <!-- CreatedOn -->
+                                            <Frame Grid.Column="4" BorderColor="#ddd" BackgroundColor="#fafafa" CornerRadius="4" Padding="4,6" HasShadow="False">
+                                                <Label Text="{Binding CreatedOn, StringFormat='{0:dd/MM/yyyy}'}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+
+                                          
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Text="Rate of interest:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Entry x:Name="rateofinterest"
+                         TextColor="Green"
+                         Placeholder="Rate of interest"
+                         Margin="6,2"/>
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- Expander : 11 Depreciation  -->
+            <toolkit:Expander  IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+              StrokeThickness="0"
+              BackgroundColor="#DFF0D8"
+              Padding="10"
+               StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="Depreciation "
+         FontAttributes="Bold"
+         FontSize="16"
+         TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <!-- Content -->
+                <VerticalStackLayout Padding="10" Spacing="12">
+
+                    <!-- First Row (On Building & On Machinery) -->
+                    <Grid ColumnSpacing="15" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- On Building -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="On Building " 
+             TextColor="Black" 
+             FontAttributes="Bold"/>
+                            <Entry Text="100" x:Name="OnBuildingEntry" Placeholder="On Building" Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+
+                        <!-- On Machinery -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="On Machinery" 
+             TextColor="Black" 
+             FontAttributes="Bold"/>
+                            <Entry x:Name="OnMachineryEntry" Text="100" Placeholder="On Machinery"  Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Second Row (Pay Back Period & Project Implementation Period) -->
+                    <Grid ColumnSpacing="15" RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Pay Back Period -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Pay Back Period " 
+             TextColor="Black" 
+             FontAttributes="Bold"/>
+                            <Entry x:Name="PayBackPeriodEntry" Text="100" Placeholder="Pay Back Period"  Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+
+                        <!-- Project Implementation Period -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Project Implementation Period " 
+             TextColor="Black" 
+             FontAttributes="Bold"/>
+                            <Entry x:Name="ProjectImplementationEntry" Text="100" Placeholder="Project Implementation Period "  Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+
+            <!-- Expander 12 -->
+
+            <toolkit:Expander  IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="INTRODUCTION OFFICE"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="Black"
+                       Grid.Column="0"/>
+
+                            <!-- Word Limit Info -->
+                            <Label Text="(In 500 Words)" 
+                       TextColor="Red"
+                       FontAttributes="Bold"
+                       Grid.Column="1"
+                       VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <!-- Content -->
+                <VerticalStackLayout Padding="10" Spacing="8">
+
+                    <!-- Label -->
+                    <Label Text="INTRODUCTION OFFICE"
+               TextColor="Red"
+               FontAttributes="Bold"/>
+
+                    <!-- Multi-line Editor -->
+                    <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                        <Editor x:Name="IntroductionEditor29"
+                       Placeholder="Enter Introduction Office details"
+                       AutoSize="TextChanges"
+                       HeightRequest="150"
+                       Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                    </Frame>
+
+                    <!-- Word Count Info -->
+                    <Label 
+               Text="0 / 500 words"
+               FontSize="15"
+               TextColor="Gray"
+               HorizontalOptions="End"/>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- Expander 13 -->
+
+            <toolkit:Expander  IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+                  StrokeThickness="0"
+                  BackgroundColor="#DFF0D8"
+                  Padding="10"
+                   StrokeShape="RoundRectangle 20,20,0,0">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="ABOUT THE PROMOTER"
+             FontAttributes="Bold"
+             FontSize="16"
+             TextColor="Black"
+             Grid.Column="0"/>
+
+                            <!-- Word Limit Info -->
+                            <Label Text="(In 500 Words)" 
+             TextColor="Red"
+             FontAttributes="Bold"
+             Grid.Column="1"
+             VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <!-- Content -->
+                <VerticalStackLayout Padding="10" Spacing="8">
+
+                    <!-- Label -->
+                                <Label Text="INTRODUCTION OFFICE"
+                 TextColor="Red"
+                 FontAttributes="Bold"/>
+
+                                <!-- Multi-line Editor -->
+                                <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                                    <Editor 
+              Placeholder="Enter Introduction Office details"
+              AutoSize="TextChanges"
+              HeightRequest="150"
+              Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                                </Frame>
+
+                                <!-- Word Count Info -->
+                                <Label 
+                 Text="0 / 500 words"
+                 FontSize="15"
+                 TextColor="Gray"
+                 HorizontalOptions="End"/>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- Expander 14 -->
+            <toolkit:Expander IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="Implementing Agency"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                    </Border>
+                </toolkit:Expander.Header>
+                <ScrollView>
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Top dropdowns -->
+                        <Grid ColumnSpacing="10" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Implementing Agency Dropdown -->
+                            <Picker Grid.Column="0"
+                                    Title="Implementing Agency"
+                                    ItemsSource="{Binding AgencyList}"
+                                    SelectedItem="{Binding SelectedAgency}"/>
+
+                            <!-- State Dropdown -->
+                            <Picker Grid.Column="1"
+                                    Title="State"
+                                    ItemsSource="{Binding StateList}"
+                                    SelectedItem="{Binding SelectedState}"/>
+
+                            <!-- District Dropdown -->
+                            <Picker Grid.Column="2"
+                                    Title="District"
+                                    ItemsSource="{Binding DistrictList}"
+                                    SelectedItem="{Binding SelectedDistrict}"/>
+                        </Grid>
+
+                        <!-- Agency Details Box -->
+                        <Border Stroke="LightGray" StrokeThickness="1" StrokeShape="RoundRectangle 5">
+                            <Grid ColumnSpacing="10" RowSpacing="6" Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Orange Accent Line -->
+                                <BoxView Grid.RowSpan="6"
+                                     WidthRequest="4"
+                                     BackgroundColor="{StaticResource AccentColor}"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="FillAndExpand" />
+
+                                <!-- Agency Name -->
+                                <Label Grid.Column="1"
+                                       Text="Khadi and Village Industries Commission"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       TextColor="#2E6DA4"/>
+
+                                <!-- Address -->
+                                <Label Grid.Column="1" Grid.Row="1"
+           Text="2nd Floor, Mytri Willows, Sir Bazonji Mehta Road, Gandhi Sagar, Nagpur"/>
+
+                                <!-- District -->
+                                <Label Grid.Column="1" Grid.Row="2" Text="District: Nagpur"/>
+
+                                <!-- Pin -->
+                                <Label Grid.Column="1" Grid.Row="3" Text="Pin: "/>
+
+                                <!-- State -->
+                                <Label Grid.Column="1" Grid.Row="4" Text="State: Maharashtra"/>
+
+                                <!-- Contact Info -->
+                                <HorizontalStackLayout Grid.Column="1" Grid.Row="5" Spacing="20">
+                                    <Label Text="Ph No: 9865876457"/>
+                                    <Label Text="Email: demo@gmail.com"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                </ScrollView>
+
+            </toolkit:Expander>
+
+            <!-- Expander 15 -->
+
+            <toolkit:Expander  IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="INTRODUCTION"
+                                  FontAttributes="Bold"
+                                  FontSize="16"
+                                  TextColor="Black"
+                                  Grid.Column="0"/>
+
+                            <!-- Word Limit Info -->
+                            <Label Text="(In 500 Words)" 
+                                  TextColor="Red"
+                                  FontAttributes="Bold"
+                                  Grid.Column="1"
+                                  VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <!-- Content -->
+                <VerticalStackLayout Padding="10" Spacing="8">
+
+                    <!-- Label -->
+                    <Label Text="INTRODUCTION OFFICE"
+                          TextColor="Red"
+                          FontAttributes="Bold"/>
+
+                    <!-- Multi-line Editor -->
+                    <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                        <Editor
+                          Placeholder="Enter Introduction Office details"
+                          AutoSize="TextChanges"
+                          HeightRequest="150"
+                          Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                    </Frame>
+
+                    <!-- Word Count Info -->
+                    <Label 
+                      Text="0 / 500 words"
+                      FontSize="15"
+                      TextColor="Gray"
+                      HorizontalOptions="End"/>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- Expander 16 -->
+
+            <toolkit:Expander  IsExpanded="True">
+                <!-- Header -->
+                <toolkit:Expander.Header>
+                    <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="ABOUT THE BENEFICIARY"
+                                  FontAttributes="Bold"
+                                  FontSize="16"
+                                  TextColor="Black"
+                                  Grid.Column="0"/>
+
+                            <!-- Word Limit Info -->
+                            <Label Text="(In 500 Words)" 
+                              TextColor="Red"
+                              FontAttributes="Bold"
+                              Grid.Column="1"
+                              VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </toolkit:Expander.Header>
+
+                <!-- Content -->
+                <VerticalStackLayout Padding="10" Spacing="8">
+
+                    <!-- Label -->
+                    <Label Text="INTRODUCTION OFFICE"
+                          TextColor="Red"
+                          FontAttributes="Bold"/>
+
+                    <!-- Multi-line Editor -->
+                    <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                        <Editor 
+                           Placeholder="Enter Introduction Office details"
+                           AutoSize="TextChanges"
+                           HeightRequest="150"
+                           Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                    </Frame>
+
+                    <!-- Word Count Info -->
+                    <Label
+                          Text="0 / 500 words"
+                          FontSize="15"
+                          TextColor="Gray"
+                          HorizontalOptions="End"/>
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <!-- Submit Button -->
+            <Button Text="Save"
+             BackgroundColor="{StaticResource Green}"
+             TextColor="White"
+             FontAttributes="Bold"
+             CornerRadius="5"
+             HorizontalOptions="Center"
+              Clicked="SaveDPRData"
+             WidthRequest="150"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentView>

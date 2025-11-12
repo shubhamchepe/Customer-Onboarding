@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="PMEGPCUSTOMERBank.PopUp.OtpPopup"
+    Size="350,500">
+    <!-- Height badha diya -->
+
+    <VerticalStackLayout BackgroundColor="White" Padding="20" Spacing="15">
+
+        <!-- Title -->
+        <Label Text="Aadhaar OTP" 
+               FontSize="22" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+
+        <BoxView HeightRequest="2"
+                 WidthRequest="40"
+                 VerticalOptions="Center"
+                 BackgroundColor="Gray"
+                 HorizontalOptions="Center"/>
+
+        <!-- Consent -->
+        <HorizontalStackLayout Spacing="10">
+            <CheckBox x:Name="consentCheck"
+                      Color="Gray"/>
+            <!-- Purple ke jagah Gray -->
+            <Label Text="UIDAI OTP consent" 
+                   VerticalOptions="Center" 
+                   FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
+        <Label FontSize="12" TextColor="Gray"
+               Text="I hereby give my consent to use Aadhaar OTP authentication for eKYC to apply for the PMEGP loan. I understand that by performing this authentication, the basic demographic details such as my name, date of birth, gender, and address as registered with UIDAI may be shared by UIDAI."
+               LineBreakMode="WordWrap" />
+
+        <!-- OTP Info -->
+        <Label Text="Aadhaar OTP has been sent on registered mobile number." 
+               TextColor="Black" 
+               FontSize="14"
+               LineBreakMode="WordWrap" />
+
+        <!-- OTP Entry -->
+        <Entry x:Name="otpEntry" 
+               Placeholder="Enter Aadhaar OTP" 
+               Keyboard="Numeric"
+               />
+
+        <!-- Error Label (optional) -->
+        <Label x:Name="errorLabel" 
+               TextColor="Red" 
+               FontSize="12" 
+               IsVisible="False" />
+
+        <!-- Buttons -->
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button Text="Submit" 
+                    Clicked="OnSubmitClicked" 
+                      BackgroundColor="{StaticResource Green}"
+                    TextColor="White" 
+                    WidthRequest="100" />
+            <Button Text="Close" 
+                    Clicked="OnCloseClicked" 
+                    x:Name="submitButton"
+                    BackgroundColor="SkyBlue"
+                    TextColor="White" 
+                     IsEnabled="False"
+                    WidthRequest="100" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</toolkit:Popup>

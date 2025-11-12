@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.MainPage"
+                Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+
+    <Grid>
+        <Image Source="image8.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Aspect="AspectFit"
+               WidthRequest="200"
+               HeightRequest="200" />
+        <!-- Loader -->
+        <ActivityIndicator Grid.Row="1"
+                           IsRunning="True"
+                           IsVisible="True"
+                           Color="{StaticResource Green}"
+                           HorizontalOptions="Center"
+                           Margin="0,40,0,0"
+                           WidthRequest="40"
+                           HeightRequest="40"/>
+    </Grid>
+
+</ContentPage>

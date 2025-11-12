@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.PopUp.IndustrySelectionPage"
+             Title="IndustrySelectionPage">
+    
+    <Grid Padding="15" RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+        <!-- Title -->
+        <Label Text="Select Industry (NIC Data)"
+               FontSize="20"
+               FontAttributes="Bold"
+               Grid.Row="0"
+               TextColor="Black"
+               HorizontalOptions="Start" />
+
+        <!-- Filters Vertical -->
+        <StackLayout Grid.Row="1" Spacing="10">
+            <Picker x:Name="divisionPicker" Title="--Select Division--"/>
+            <Picker x:Name="groupPicker" Title="--Select Group--"/>
+            <Picker x:Name="classPicker" Title="--Select Class--"/>
+        </StackLayout>
+
+        <!-- Search + Clear -->
+        <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="2" Margin="0,10,0,10">
+            <Label Text="Search:" VerticalOptions="Center"/>
+            <Entry x:Name="searchEntry" Placeholder="Search..." WidthRequest="200"/>
+            <Button Text="Clear Filters" BackgroundColor="DarkGreen" TextColor="White" Clicked="OnClearFilters"/>
+        </StackLayout>
+
+        <!-- Table using CollectionView -->
+        <Grid Grid.Row="3" RowDefinitions="Auto,*">
+            <!-- Header Row -->
+            <Grid BackgroundColor="#f2f2f2" Padding="5" ColumnDefinitions="80,120,*">
+                <Label Text="Select" FontAttributes="Bold"/>
+                <Label Grid.Column="1" Text="NIC Code" FontAttributes="Bold"/>
+                <Label Grid.Column="2" Text="Description" FontAttributes="Bold"/>
+            </Grid>
+
+            <!-- Body -->
+            <CollectionView x:Name="industryListView"
+                            Grid.Row="1"
+                            ItemsSource="{Binding IndustryList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5" ColumnDefinitions="80,120,*" RowDefinitions="Auto">
+                            <CheckBox IsChecked="{Binding IsSelected}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding NICCode}" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Description}" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Bottom Select Button -->
+        <Button Text="Select"
+                Grid.Row="4"
+                BackgroundColor="Green"
+                TextColor="White"
+                HeightRequest="45"
+                Clicked="OnSelectClicked"/>
+    </Grid>
+    
+    
+</ContentPage>

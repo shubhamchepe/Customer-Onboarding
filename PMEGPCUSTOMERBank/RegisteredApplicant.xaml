@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.RegisteredApplicant"
+                          NavigationPage.HasNavigationBar="False"
+   Shell.BackgroundColor="{StaticResource Green}"
+   Shell.TitleColor="White"
+   Shell.ForegroundColor="White"
+             Title="RegisteredApplicant">
+
+    <Grid Padding="20" BackgroundColor="LightGray">
+        <Frame
+              CornerRadius="15"
+              BackgroundColor="White"
+              Padding="0"
+             
+              VerticalOptions="Center"
+              HorizontalOptions="FillAndExpand">
+
+            <Grid ColumnDefinitions="8,*,*">
+                <!-- Orange strip -->
+                <BoxView Grid.Column="0"
+                        BackgroundColor="#FF6600"
+                        CornerRadius="10,0,0,10" />
+
+                <!-- Login Form -->
+                <VerticalStackLayout Grid.Column="1" Grid.ColumnSpan="2"
+                                    Padding="20"
+                                    Spacing="15">
+
+                    <!-- Header -->
+                    <Border
+                       StrokeThickness="0"
+                       BackgroundColor="#DFF0D8"
+                       Padding="10"
+                       StrokeShape="RoundRectangle 20,20,0,0">
+                        <Label Text="Physical Verification Login"
+                              FontAttributes="Bold"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center"/>
+                    </Border>
+
+                    <!-- User ID -->
+                    <Grid ColumnDefinitions="*,40"
+                         BackgroundColor="#F5F5F5"
+                         Padding="5"
+                         HeightRequest="50"
+                         HorizontalOptions="FillAndExpand">
+                        <Entry Placeholder="User ID"
+                               x:Name="UserIdEntry"
+                              BackgroundColor="Transparent"/>
+                        <Image Source="user.png"
+                              Grid.Column="1"
+                                      HeightRequest="20"
+                            WidthRequest="20"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+                    </Grid>
+
+                    <!-- Password -->
+                    <Grid ColumnDefinitions="*,40"
+                         BackgroundColor="#F5F5F5"
+                         Padding="5"
+                         HeightRequest="50"
+                         HorizontalOptions="FillAndExpand">
+                        <Entry Placeholder="Password"
+                              IsPassword="True"
+                               x:Name="PasswordEntry"
+                               
+                              BackgroundColor="Transparent"/>
+                        <Image Source="padlock.png"
+                              Grid.Column="1"
+                                    HeightRequest="20"
+                              WidthRequest="20" 
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+                    </Grid>
+
+                    <!-- Captcha Row -->
+                    <Grid ColumnDefinitions="*,40"
+                         BackgroundColor="#F5F5F5"
+                         Padding="5"
+                         HeightRequest="50"
+                         HorizontalOptions="FillAndExpand">
+                        <Label Text="UL27Q"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Start"/>
+                        <Image Source="refresh.png"
+                                      HeightRequest="20"
+                            WidthRequest="20"
+                              Grid.Column="1"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"/>
+                    </Grid>
+
+                    <!-- Captcha Input -->
+                    <Entry Placeholder="Captcha Input"
+                          BackgroundColor="#F5F5F5"
+                          HeightRequest="50"
+                               x:Name="CaptchaInput"
+                           
+                          HorizontalOptions="FillAndExpand"/>
+
+                    <!-- Forgot password + Login button -->
+                    <Grid ColumnDefinitions="*,Auto" Padding="5">
+                        <Label Text="Forgot password?"
+                              TextColor="{StaticResource Green}"
+                              VerticalOptions="Center"
+                              FontAttributes="Bold"/>
+                        <Button Text="LOGIN"
+                               Grid.Column="1"
+                               BackgroundColor="{StaticResource Green}"
+                               TextColor="White"
+                               CornerRadius="5"
+                               WidthRequest="120"
+                                Clicked="OnLoginClicked"
+                               HeightRequest="45"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+    </Grid>
+
+
+</ContentPage>

@@ -1,0 +1,2861 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PMEGPCUSTOMERBank.RegisteredApplicantsDashboard"
+             xmlns:local="clr-namespace:PMEGPCUSTOMERBank"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+                         Shell.NavBarIsVisible="True"
+                        Shell.BackgroundColor="{StaticResource Green}"
+                        Shell.TitleColor="White"
+                        Shell.ForegroundColor="White"
+             Title="RegisteredApplicantsDashboard">
+    
+    <ContentPage.Resources>
+
+        <toolkit:Popup 
+              x:Key="IndustryPopup"
+    Color="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="True">
+
+            <Frame 
+        BackgroundColor="White"
+        CornerRadius="12"
+        HasShadow="True"
+        WidthRequest="350"
+        HeightRequest="600"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Padding="15">
+
+                <ScrollView>
+                    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" RowSpacing="10">
+
+                        <!-- Title -->
+                        <Label Text="Select Industry (NIC Data)"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Grid.Row="0"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,10"/>
+
+                        <!-- Filters -->
+                        <StackLayout Grid.Row="1" Spacing="8">
+                            <Label Text="Division" VerticalOptions="Center"/>
+                            <Picker x:Name="divisionPicker" Title="Select Division" SelectedIndexChanged="DivisionPicker_SelectedIndexChanged"/>
+
+                            <Label Text="Group" VerticalOptions="Center"/>
+                            <Picker x:Name="groupPicker" Title="Select Group" SelectedIndexChanged="GroupPicker_SelectedIndexChanged"/>
+
+                            <Label Text="Class" VerticalOptions="Center"/>
+                            <Picker x:Name="classPicker" Title="Select Class" SelectedIndexChanged="ClassPicker_SelectedIndexChanged"/>
+                        </StackLayout>
+
+                        <!-- Search + Clear -->
+                        <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="2" Margin="0,10,0,10">
+                            <Label Text="Search:" VerticalOptions="Center"/>
+                            <Entry x:Name="searchEntry" Placeholder="Search..." WidthRequest="200"/>
+                            <Button Text="Clear"
+                            BackgroundColor="{StaticResource Green}"
+                            TextColor="White"
+                            CornerRadius="6"
+                            Clicked="OnClearClicked"/>
+                        </StackLayout>
+
+                        <!-- Table -->
+                        <Grid Grid.Row="3" RowDefinitions="Auto,*">
+                            <!-- Header -->
+                            <Grid BackgroundColor="#f2f2f2" Padding="6" ColumnDefinitions="60,100,*">
+                                <Label Text="Select" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text="NIC Code" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="Description" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </Grid>
+
+                            <!-- Data Rows -->
+                            <CollectionView x:Name="industryListView"
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding PagedList}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="6" ColumnDefinitions="60,100,*" BackgroundColor="White">
+                                            <CheckBox IsChecked="{Binding IsSelected}" HorizontalOptions="Center"/>
+                                            <Label Grid.Column="1" Text="{Binding NicCode}" VerticalOptions="Center" FontSize="14"/>
+                                            <Label Grid.Column="2" Text="{Binding NicDesc}" VerticalOptions="Center" FontSize="14" LineBreakMode="WordWrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+
+                        <!-- Pagination Controls -->
+                        <StackLayout Orientation="Horizontal"
+                             Grid.Row="4"
+                             HorizontalOptions="Center"
+                             Spacing="20"
+                             Margin="0,10,0,10">
+                            <Button Text="Prev"
+                            BackgroundColor="{StaticResource Green}"
+                            TextColor="White"
+                            WidthRequest="80"
+                            CornerRadius="8"
+                            Clicked="OnPrevClicked"/>
+                            <Label x:Name="pageLabel"
+                           Text="Page 1/1"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           TextColor="Black"/>
+                            <Button Text="Next"
+                            BackgroundColor="{StaticResource Green}"
+                            TextColor="White"
+                            WidthRequest="80"
+                            CornerRadius="8"
+                            Clicked="OnNextClicked"/>
+                        </StackLayout>
+
+                        <!-- Bottom Select Button -->
+                        <Button Text="Select"
+                        Grid.Row="5"
+                        BackgroundColor="{StaticResource Green}"
+                        TextColor="White"
+                        HeightRequest="45"
+                        CornerRadius="8"
+                        FontAttributes="Bold"
+                        Clicked="OnSelectClicked"/>
+                    </Grid>
+                </ScrollView>
+            </Frame>
+        </toolkit:Popup>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- 🔹 TOP HORIZONTAL STEPPER -->
+        <ScrollView  Orientation="Horizontal"
+         BackgroundColor="#E6F2E6"
+       
+         Padding="10">
+
+            <HorizontalStackLayout Spacing="20"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center">
+
+
+                <VerticalStackLayout  Spacing="5" HorizontalOptions="CenterAndExpand">
+                    <Frame x:Name="Step1Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="Orange"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Application"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center">
+
+                    </Label>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step2Circle"
+    WidthRequest="40"
+    HeightRequest="40"
+    CornerRadius="20"
+    BackgroundColor="LightGray"
+    HasShadow="False"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Image Source="right.png"
+            WidthRequest="20"
+            HeightRequest="20"
+            Aspect="AspectFit"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+
+                    <Label Text="DPR"
+    FontSize="15"
+    FontAttributes="Bold"
+    HorizontalOptions="Center">
+
+                    </Label>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step3Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="LightGray"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Score Card"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step4Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="LightGray"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Upload Documents"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step5Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="LightGray"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Final Submission"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step6Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="LightGray"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Under Process"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Line -->
+                <BoxView HeightRequest="2"
+              WidthRequest="40"
+              VerticalOptions="Center"
+              BackgroundColor="Gray"/>
+
+                <VerticalStackLayout HorizontalOptions="CenterAndExpand"  Spacing="5">
+                    <Frame x:Name="Step7Circle"
+        WidthRequest="40"
+        HeightRequest="40"
+        CornerRadius="20"
+        BackgroundColor="LightGray"
+        HasShadow="False"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStepTapped"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Image Source="right.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="Loan Sanction"
+        FontSize="15"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+
+
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- 🔹 Placeholder for Forms -->
+        <!--<ContentView x:Name="FormContainer"
+                  VerticalOptions="FillAndExpand"
+                  BackgroundColor="White"/>-->
+        <ScrollView Grid.Row="1">
+            <ContentView x:Name="FormContainer"
+                 Padding="10"
+                 BackgroundColor="White"/>
+        </ScrollView>
+
+
+
+        <ScrollView Grid.Row="2">
+
+            <VerticalStackLayout x:Name="ApplicationForm" Padding="10" Spacing="10">
+
+                <!-- Basic Information -->
+                <toolkit:Expander x:Name="basicInfoExpander"  IsExpanded="True" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border
+             StrokeThickness="0"
+             BackgroundColor="#DFF0D8"
+             Padding="10"
+             StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                <Label FontSize="15" Text="Basic Information" FontAttributes="Bold" />
+                                <Image x:Name="basicInfoArrow"
+                 Source="upload.png" 
+                  WidthRequest="16"
+           HeightRequest="16"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End" />
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- Aadhar -->
+                            <Entry x:Name="adharEntry" Placeholder="Adhar Card No." Keyboard="Numeric" />
+                            <Button Text="VALIDATE ADHAR"  BackgroundColor="{StaticResource Green}" TextColor="White"  />
+
+                            <!-- PAN -->
+                            <Label Text="Pan No."/>
+                            <Entry  x:Name="pancardNo" Placeholder="Pan No." />
+
+ 
+                            <Label Text="Title"/>
+                            <Picker x:Name="titlePicker"
+                  Title="Select Title"
+                  ItemDisplayBinding="{Binding Name}" />
+
+
+                            <!-- Applicant Name -->
+                            <Label Text="Name of Applicant"/>
+                            <Entry  IsReadOnly="True"  x:Name="txtApplicantName" Placeholder="Name of Applicant" />
+                            <Label Text="(Name as per Aadhaar card)" TextColor="{StaticResource Green}" FontSize="12"/>
+
+                            <!-- DOB -->
+                            <Label Text="Date of Birth"/>
+                            <Entry  IsReadOnly="True"  x:Name="txtDOB" Placeholder="Date Of Birth" />
+
+                            <!-- Age -->
+                            <Label Text="Age"/>
+                            <Entry  IsReadOnly="True"  x:Name="txtAge" Placeholder="Age" Keyboard="Numeric" />
+
+                            <!-- Gender -->
+                            <Label Text="Gender"/>
+                            <Entry  x:Name="genderPicker" IsReadOnly="True" Placeholder="Gender"  />
+                            <!--<Picker   x:Name="genderPicker"
+      Title="Select Gender"
+      IsEnabled="False"
+       
+        ItemDisplayBinding="{Binding LKDescription}" />-->
+
+
+
+                            <Label Text="Social Category"/>
+                            <Picker x:Name="socialCategoryPicker"
+              Title="Select Social Category"
+              ItemDisplayBinding="{Binding LKDescription}" />
+
+
+                            <!-- Special Category -->
+                            <Label Text="Special Category (if any)"/>
+                            <Picker x:Name="specialCategoryPicker"
+                Title="Select Social Category"
+                ItemDisplayBinding="{Binding LKDescription}" />
+
+                            <!-- Qualification -->
+                            <Label Text="Qualification"/>
+                            <Picker x:Name="qualifictionPicker"
+                   Title="Select Social Category"
+                   ItemDisplayBinding="{Binding LKDescription}" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+
+
+
+                </toolkit:Expander>
+
+
+                <!-- Communication Address -->
+                <toolkit:Expander  x:Name="CommAddForm"  IsExpanded="True" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                                                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                    <Label FontSize="15" Text="Communication Address" FontAttributes="Bold" />
+                                                    <Image x:Name="commAddrArrow"
+                            Source="upload.png"
+                            WidthRequest="16"
+                            HeightRequest="16"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+                                                </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+                            <Entry x:Name="comnAddressEntry" Placeholder="Communication address" />
+                            <Label Text="Select State" />
+                            <Picker x:Name="statePicker"
+                        Title="Select State"
+                        
+                        SelectedIndex="0">
+                            </Picker>
+
+                            <Label Text="District" />
+                            <Entry x:Name="districtEntry" Placeholder="District" IsReadOnly="True" />
+
+                            <Button Text="CHANGE DISTRICT"
+                            BackgroundColor="{StaticResource Green}"
+                           TextColor="White"
+                       
+                                
+                                
+                           CornerRadius="5"/>
+                            <Label Text="Taluka" />
+                            <Entry  x:Name="talukaEntry"  Placeholder="Taluka/Block" />
+
+                            <Label Text="PIN" />
+                            <Entry  x:Name="pinEntry" Placeholder="Pin" Keyboard="Numeric"/>
+
+                            <Label Text="Primary mobile no." />
+                            <Entry  x:Name="mobile1Entry" Placeholder="Primary Mobile Number" Keyboard="Telephone"/>
+
+                            <Label Text="Secondary mobile no." />
+                            <Entry  x:Name="mobile2Entry"  Placeholder="Secondary Mobile Number" Keyboard="Telephone"/>
+
+                            <Label Text="Email" />
+                            <Entry  x:Name="emailEntry" Placeholder="Email" Keyboard="Email"/>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                <!-- Implementing Agency -->
+                <toolkit:Expander  IsExpanded="True" x:Name="implementingAgencyExpander" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border
+         StrokeThickness="0"
+         BackgroundColor="#DFF0D8"
+         Padding="10"
+         StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                <Label FontSize="15" Text="Implementing Agency" FontAttributes="Bold"/>
+                                <!-- Arrow Icon -->
+                                <Image x:Name="implementingAgencyArrow"
+        Source="upload.png" 
+       WidthRequest="16"
+   HeightRequest="16"
+        HorizontalOptions="End"
+        VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Scrollable Form Content -->
+                    <ScrollView HeightRequest="300">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+                            <Label Text="Implementing Agency" />
+
+                            <Picker x:Name="agencyPicker"
+          Title="Select Implementing Agency"
+        SelectedIndexChanged="AgencyPicker_SelectedIndexChanged"
+          ItemDisplayBinding="{Binding Agency_Code}" />
+
+
+                            <Label Text="Select State" />
+                            <Picker x:Name="statePickerforAgency"
+       
+            ItemDisplayBinding="{Binding State_Name}" 
+           SelectedIndexChanged="GetDistrictByState"
+          SelectedIndex="0">
+                            </Picker>
+
+                            <Label Text="Select District" />
+                            <Picker x:Name="districtPicker1"
+           SelectedIndexChanged="DistrictPicker1_SelectedIndexChanged"
+                
+          Title="Select District"
+          ItemDisplayBinding="{Binding District_Name}" />
+
+                            <Frame x:Name="agencyDetailsLayout"
+           IsVisible="False"
+            BorderColor="Orange"
+            BackgroundColor="#FFFFFF"
+            CornerRadius="10"
+            Padding="10"
+            >
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Checkbox -->
+                                    <CheckBox Grid.Column="0"
+                       VerticalOptions="Start"
+                       Margin="5" />
+
+                                    <!-- Agency Details -->
+                                    <VerticalStackLayout Grid.Column="1"
+                                  Spacing="5"
+                                  Padding="10,0,0,0">
+
+                                        <Label Text="{Binding SelectedComboText}"
+                        FontAttributes="Bold"
+                        FontSize="14" />
+
+                                        <Label  x:Name="agencyNameLabel" />
+                                        <Label x:Name="agencyDistrictLabel" />
+                                        <Label x:Name="agencyStateLabel" />
+                                        <Label  x:Name="agencyContactLabel" />
+                                        <Label x:Name="agencyEmailLabel"  />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                
+                <!-- Unit Address -->
+                <toolkit:Expander IsExpanded="True" x:Name="unitAddressExpander"  ExpandedChanged="OnExpanderChanged" >
+                    <toolkit:Expander.Header>
+                        <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#DFF0D8"
+                    Padding="10"
+                    StrokeShape="RoundRectangle 20,20,0,0">
+                                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                <Label FontSize="15" Text="Unit Address" FontAttributes="Bold"/>
+                                                <!-- Arrow Icon -->
+                                                <Image x:Name="unitAddressArrow"
+                        Source="upload.png" 
+                          WidthRequest="16"
+                         HeightRequest="16"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"/>
+                                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Scrollable content -->
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- District -->
+                            <Label Text="District" />
+                            <Picker
+                             x:Name="districtPicker"
+                            Title="Select District"
+                             IsEnabled="False"
+                             ItemDisplayBinding="{Binding District_Name}"
+                             SelectedIndexChanged="OnDistrictSelected"/>
+
+
+                            <!-- Sub District -->
+                            <Label Text="Sub District" />
+                            <Picker
+                        x:Name="subDistrictPicker"
+                        Title="Select Sub District"
+                        ItemDisplayBinding="{Binding SubDistrict_Name}"
+                            SelectedIndexChanged="OnSubDistrictSelected"/>
+
+
+                            <!-- Village -->
+                            <Label Text="Village" />
+                            <Picker x:Name="villagePicker"
+                        Title="Select Village"
+                        ItemDisplayBinding="{Binding Village_Name}"
+                        />
+
+
+                            <!-- LGD Code -->
+                            <Label Text="LGD Code" />
+                            <Entry x:Name="txtLGDCode" Placeholder="LGD Code" />
+
+                            <!-- Pin -->
+                            <Label Text="PIN Code" />
+                            <Entry x:Name="txtPincode" Placeholder="Pin" Keyboard="Numeric" />
+
+                            <!-- Unit Location -->
+                            <Label Text="Unit Location" />
+                            <Picker x:Name="pickerUnitLocation" Title="Select">
+                                <Picker.Items>
+                                    <x:String>Rural</x:String>
+                                    <x:String>Urban</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+
+                            <!-- Unit Address -->
+                            <Label Text="Unit Address" />
+                            <Editor  x:Name="txtUnitAddress" Placeholder="Unit Address" AutoSize="TextChanges" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+
+
+                <!-- Project Information -->
+                <toolkit:Expander  IsExpanded="True" x:Name="projectInfoExpander" ExpandedChanged="OnExpanderChanged" >
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                                                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                    <Label FontSize="15" Text="Project Information" FontAttributes="Bold"/>
+                                                    <!-- Arrow Icon -->
+                                                    <Image x:Name="projectInfoArrow"
+                            Source="upload.png" 
+                             WidthRequest="16"
+                             HeightRequest="16"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+                    <!-- Scrollable Content -->
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- Type of Activity -->
+                            <Label Text="Type Of Activity" />
+                            <Picker x:Name="schemePicker"
+                        Title="Select Scheme"
+                        ItemDisplayBinding="{Binding SchemeName}" />
+
+
+                            <!-- Industry Selection Buttons -->
+                            <Label Text="Kindly select at least one Industry/Activity" TextColor="Red" />
+                            <HorizontalStackLayout Spacing="10">
+                                <Button Text="SELECT INDUSTRY/ACTIVITY" Clicked="OnSelectIndustryClicked"   BackgroundColor="{StaticResource Green}" TextColor="White"/>
+                                <Button Text="NIC CODE LIST"   BackgroundColor="{StaticResource Green}" TextColor="White"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Table Header -->
+                            <Grid BackgroundColor="LightGray" Padding="5" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr No" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="NIC Code" Grid.Column="1" FontAttributes="Bold" />
+                                <Label Text="Product Description" Grid.Column="2" FontAttributes="Bold" />
+                                <Label Text="Action" Grid.Column="3" FontAttributes="Bold" />
+                            </Grid>
+
+                            <!-- Orange Line Under Header -->
+                            <BoxView HeightRequest="2"
+        Color="{StaticResource AccentColor}"
+        HorizontalOptions="FillAndExpand"
+        Margin="0,2,0,2"/>
+
+                            <CollectionView ItemsSource="{Binding SelectedIndustries}"
+x:Name="selectedIndustryList"
+Margin="0,10,0,0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="5" ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.7*"/>
+                                                <ColumnDefinition Width="0.3*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Sr No (index + 1) -->
+                                            <!--<Label Grid.Column="0" 
+                       Text="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}}" 
+                       FontAttributes="Bold">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                     Value="-1">
+                                    <Setter Property="Text" Value="1"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>-->
+                                            <Label Grid.Column="0"
+                       Text="{Binding SrNo}"
+                       FontAttributes="Bold" />
+
+                                            <Label Text="{Binding NicCode}" Grid.Column="1" FontAttributes="Bold"/>
+                                            <Label Text="{Binding NicDesc}" Grid.Column="2" LineBreakMode="WordWrap"/>
+
+                                            <!-- Delete Button -->
+                                            <Button Text="X"
+                        Grid.Column="3"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        FontSize="12"
+                        WidthRequest="40"
+                        HeightRequest="30"
+                        CornerRadius="15"
+                        Padding="0"
+                        Command="{Binding Source={x:Reference selectedIndustryList}, Path=BindingContext.DeleteCommand}"
+                        CommandParameter="{Binding}" />
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+
+
+
+                            <!-- Dropdown for Yes/No -->
+                            <Label Text="Have youcompleted EDP training"/>
+
+                            <Picker x:Name="edpPicker"
+        Title="Select"
+        SelectedIndexChanged="OnEdpPickerChanged">
+                                <Picker.Items>
+                                    <x:String>Select</x:String>
+                                    <x:String>Yes</x:String>
+                                    <x:String>No</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <!-- Radio Buttons -->
+                            <StackLayout Orientation="Horizontal" Spacing="10" x:Name="edpOptionsLayout" IsVisible="False">
+                                <RadioButton Content="Online EDP"
+                 GroupName="EDPMode"
+                 CheckedChanged="OnEdpModeChanged"
+                  x:Name="radioOnlineEDP"
+                 FontSize="14"
+                 Scale="0.9" />
+
+                                <RadioButton Content="Offline EDP"
+                 GroupName="EDPMode"
+                 CheckedChanged="OnEdpModeChanged"
+                  x:Name="radioOfflineEDP"
+                 FontSize="14"
+                 Scale="0.9" />
+                            </StackLayout>
+
+                            <!-- Online Layout -->
+                            <StackLayout x:Name="onlineLayout" Orientation="Horizontal" Spacing="10" IsVisible="False">
+
+                                <Entry x:Name="onlineEntry"
+                        Text="UDYAMI - Samadhan Portal"
+                        TextColor="Black"
+                                       IsReadOnly="True"
+                        WidthRequest="200"/>
+                            </StackLayout>
+
+                            <!-- Offline Layout -->
+                            <StackLayout x:Name="offlineLayout" Orientation="Horizontal" Spacing="10" IsVisible="False">
+                                <Entry x:Name="offlineEntry"
+           Text="EDP Training Instn. Name"
+                       TextColor="Black"
+                       IsReadOnly="True"
+           WidthRequest="200"/>
+                                <Button Text="Select EDP"  BackgroundColor="{StaticResource Green}" TextColor="White" Clicked="OnSelectEdpClicked"/>
+                            </StackLayout>
+
+
+
+
+                                                <!-- Capital Expenditure -->
+                                                <Entry x:Name="capitalEntry"
+                    Placeholder="Capital Expenditure"
+                    Keyboard="Numeric"
+                    TextChanged="OnCostChanged" />
+                                                <Label x:Name="capitalWordsLabel"
+                    FontSize="12"
+                    Text="Rupees Zero Only" />
+
+                                                <!-- Working Capital -->
+                                                <Entry x:Name="workingCapEntry"
+                    Placeholder="Working Capital"
+                    Keyboard="Numeric"
+                    TextChanged="OnCostChanged" />
+                                                <Label x:Name="workingWordsLabel"
+                    FontSize="12"
+                    Text="Rupees Zero Only" />
+
+                                                <!-- Total -->
+                                                <Entry x:Name="totalCostEntry"
+                    Placeholder="Total"
+                    IsReadOnly="True" />
+                                                <Label x:Name="totalWordsLabel"
+                    FontSize="12"
+                    Text="Rupees Zero Only" />
+
+                                                <!-- No of Employees (Always 1) -->
+                                                <Entry x:Name="employeeEntry"
+                    Text="0"
+                    IsReadOnly="True"
+                    Placeholder="No of Employees" />
+
+
+
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+
+                <!-- Primary Financing Bank -->
+                <toolkit:Expander IsExpanded="True" x:Name="primaryBankExpander" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border StrokeThickness="0"
+                      BackgroundColor="#DFF0D8"
+                      Padding="10"
+                      StrokeShape="RoundRectangle 20,20,0,0">
+                                                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                    <Label FontSize="15" Text="Primary Financing Bank" FontAttributes="Bold"/>
+                                                    <!-- Arrow Icon -->
+                                                    <Image x:Name="primaryBankArrow"
+                             Source="upload.png" 
+                               WidthRequest="16"
+                                 HeightRequest="16"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <StackLayout Padding="10" Spacing="12">
+
+                        <!-- Dropdown of Bank Names -->
+                        <Picker x:Name="primaryBankPicker"
+                Title="Bank Name"
+                ItemsSource="{Binding BankList}"
+                ItemDisplayBinding="{Binding BankName}" />
+
+                        <Entry x:Name="ifscEntry" Placeholder="IFSC/Bank Code" />
+                        <Button Text="SELECT BANK IFSC CODE AND ADDRESS"
+                     BackgroundColor="{StaticResource Green}"
+                    TextColor="White"
+                    Clicked="OnSelectBankIfscClicked"/>
+                        <Label FontSize="15" Text="Branch Name"/>
+                        <Entry x:Name="branchEntry" Placeholder="Branch Name" />
+                        <Label FontSize="15" Text="Address"/>
+                        <Entry x:Name="addressEntry" Placeholder="Address" />
+                        <Label FontSize="15" Text="District"/>
+                        <Entry x:Name="districtEntryBox1" Placeholder="District" />
+
+
+                    </StackLayout>
+                </toolkit:Expander>
+
+                <!-- Alternate Financing Bank -->
+                <toolkit:Expander  IsExpanded="True" x:Name="alternateBankExpander" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border
+                     StrokeThickness="0"
+                     BackgroundColor="#DFF0D8"
+                     Padding="10"
+                     StrokeShape="RoundRectangle 20,20,0,0">
+                                            <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                <Label FontSize="15" Text="Alternate Financing Bank" FontAttributes="Bold"/>
+                                                <!-- Arrow Icon -->
+                                                <Image x:Name="alternateBankArrow"
+                         Source="upload.png" 
+                           WidthRequest="16"
+                           HeightRequest="16"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"/>
+                                            </Grid>
+                                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <StackLayout Padding="10" Spacing="12">
+                        <!-- Dropdown of Bank Names -->
+                        <Picker x:Name="primaryBankPicker1"
+      Title="Bank Name"
+      ItemsSource="{Binding BankList}"
+      ItemDisplayBinding="{Binding BankName}" />
+
+                        <Label FontSize="15" Text="IFSC/Bank Code"/>
+                        <Entry x:Name="altIfscEntry" Placeholder="IFSC/Bank Code" />
+                        <Button Text="2ND FINANCING BRANCH IFSC CODE"
+      BackgroundColor="{StaticResource Green}"
+    TextColor="White"
+            />
+                        <Label FontSize="15" Text="Branch Name"/>
+                        <Entry x:Name="altBranchEntry" Placeholder="Branch Name" />
+                        <Label FontSize="15" Text="Address"/>
+                        <Entry x:Name="altAddressEntry" Placeholder="Address" />
+                        <Label FontSize="15" Text="District"/>
+                        <Entry x:Name="altDistrictEntry" Placeholder="District" />
+                    </StackLayout>
+                </toolkit:Expander>
+
+
+                <!-- Other Information -->
+                <toolkit:Expander  IsExpanded="True" x:Name="otherInfoExpander" ExpandedChanged="OnExpanderChanged">
+                    <toolkit:Expander.Header>
+                        <Border StrokeThickness="0"
+                         BackgroundColor="#DFF0D8"
+                         Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                                                    <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                                                        <Label FontSize="15" Text="Other Information" FontAttributes="Bold"/>
+                                                        <!-- Arrow Icon -->
+                                                        <Image x:Name="otherInfoArrow"
+                                Source="upload.png" 
+                                 WidthRequest="16"
+                                 HeightRequest="16"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"/>
+                                                    </Grid>
+                                                </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Spacing="15" Padding="10">
+
+                        <!-- CGTMSE Question -->
+                        <Label Text="Want to avail CGTMSE" />
+
+                        <!-- Dropdown for Yes / No -->
+                        <Picker x:Name="cgtmsePicker"
+         Title="Select "
+         SelectedIndexChanged="cgtmsePicker_SelectedIndexChanged">
+                            <Picker.Items>
+                                <x:String>Select</x:String>
+                                <x:String>Yes</x:String>
+                                <x:String>No</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <!-- Note Line with Checkbox (Initially Hidden) -->
+                        <StackLayout x:Name="cgtmseNoteLayout"
+      IsVisible="False"
+      Orientation="Horizontal"
+      Spacing="10">
+
+                            <CheckBox  Color="{StaticResource Green}"  VerticalOptions="Start" />
+
+                            <Label Text="Note: Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTMSE) fee will be applicable from bank."
+    TextColor="Red"
+    VerticalOptions="Center"
+    HorizontalOptions="FillAndExpand"
+    LineBreakMode="WordWrap" />
+                        </StackLayout>
+
+
+                        <!-- PMEGB Info -->
+                        <Label Text="Where did you hear about PMEGP" />
+   
+                        <Picker x:Name="infoSourcePicker"
+ Title="Select Information Source"
+ ItemDisplayBinding="{Binding LKDescription}" />
+
+
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+
+                <!-- Agreement Checkbox -->
+                <Grid ColumnDefinitions="Auto,*" Padding="5">
+                    <!-- Checkbox -->
+                    <CheckBox Grid.Column="0"
+             VerticalOptions="Start"
+                          Color="Green"
+             HorizontalOptions="Start" />
+
+                    <!-- Agreement Text -->
+                    <Label Grid.Column="1"
+          Text="1. I hereby voluntarily and explicitly consent to the sharing of my Aadhaar and PAN details with KVIC and MoMSME. I understand that these details will be used solely for PMEGP Loan Purpose, and I confirm that all information shared is accurate to the best of my knowledge. I acknowledge that I have been informed about the purpose of sharing these details and agree to the same. Also, I will not shift my Unit till the Physical Verification is completed."
+          FontSize="15"
+          LineBreakMode="WordWrap"
+          VerticalOptions="Center"
+          HorizontalOptions="Start" />
+                </Grid>
+
+                <!-- Submit Button -->
+                <Button Text="UPDATE"
+                    BackgroundColor="{StaticResource Green}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="5"
+                    Clicked="UpdateForm"
+                    HorizontalOptions="Center"
+                    WidthRequest="150"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <!-- Main ScrollView -->
+        <ScrollView Grid.Row="3" x:Name="DprForm"  IsVisible="False">
+            <!-- Apply equal left/right padding here -->
+            <VerticalStackLayout Spacing="15" Padding="15,5">
+
+                <!-- Expander 1 -->
+                <toolkit:Expander IsExpanded="True" >
+                    <toolkit:Expander.Header>
+
+                        <Border
+                            StrokeThickness="0"
+                            BackgroundColor="#DFF0D8"
+                            Padding="10"
+                            StrokeShape="RoundRectangle 20,20,0,0">
+
+                            <Label Text="PMEGP Application : Detailed Project Report (DPR)" 
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   TextColor="Black"/>
+                        </Border>
+
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="300">
+                        <VerticalStackLayout Padding="10" Spacing="15">
+
+                            <!-- Dropdown -->
+                            <VerticalStackLayout>
+                                <Label Text="Type of Activity" 
+                               FontAttributes="Bold" 
+                               TextColor="Red"/>
+                                <Picker x:Name="ddlActivity" Title="Select Activity">
+                                    <Picker.Items>
+                                        <x:String>Service</x:String>
+                                        <x:String>Manufacturing</x:String>
+                                        <x:String>Trading</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </VerticalStackLayout>
+
+                            <!-- Section Title -->
+                            <Label Text="Name of the project / business activity proposed :" 
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           TextColor="Black"/>
+
+                            <!-- Table with Horizontal Scroll -->
+                            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                                <StackLayout Spacing="0">
+
+                                    <!-- Header Row -->
+                                    <Grid ColumnSpacing="1" RowSpacing="1" BackgroundColor="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="250"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="Sr No" Grid.Column="0"
+                                           FontAttributes="Bold"
+                                           Padding="5"
+                                           VerticalTextAlignment="Center"/>
+
+                                        <Label Text="NIC Code" Grid.Column="1"
+                                       FontAttributes="Bold"
+                                       Padding="5"
+                                       VerticalTextAlignment="Center"/>
+
+                                        <Label Text="Product Description" Grid.Column="2"
+                                       FontAttributes="Bold"
+                                       Padding="5"
+                                       VerticalTextAlignment="Center"/>
+                                    </Grid>
+
+                                    <!-- Orange Line under Header -->
+                                    <BoxView HeightRequest="3"
+                                      BackgroundColor="{StaticResource AccentColor}"
+                                     HorizontalOptions="FillAndExpand"/>
+
+                                    <!-- Table Rows -->
+                                    <Grid ColumnSpacing="1" RowSpacing="1" BackgroundColor="White">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="40"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="250"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Row 1 -->
+                                        <Label Text="1" Grid.Row="0" Grid.Column="0" Padding="5"/>
+                                        <Label Text="01111" Grid.Row="0" Grid.Column="1" Padding="5"/>
+                                        <Label Text="Growing of wheat" Grid.Row="0" Grid.Column="2" Padding="5"/>
+
+                                        <!-- Row 2 -->
+                                        <Label Text="2" Grid.Row="1" Grid.Column="0" Padding="5"/>
+                                        <Label Text="01112" Grid.Row="1" Grid.Column="1" Padding="5"/>
+                                        <Label Text="Growing of jowar, bajra and millets" Grid.Row="1" Grid.Column="2" Padding="5"/>
+
+                                        <!-- Row 3 -->
+                                        <Label Text="3" Grid.Row="2" Grid.Column="0" Padding="5"/>
+                                        <Label Text="01121" Grid.Row="2" Grid.Column="1" Padding="5"/>
+                                        <Label Text="Organic farming of basmati rice" Grid.Row="2" Grid.Column="2" Padding="5"/>
+                                    </Grid>
+                                </StackLayout>
+                            </ScrollView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                <!-- Expander 2  -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#DFF0D8"
+                    Padding="10"
+                     StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="BUILDING DETAILS" 
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Add Row Button -->
+                        <Button Text="➕ Add Row"
+        BackgroundColor="{StaticResource AccentColor}"
+        TextColor="White"
+        HorizontalOptions="Start"
+        CornerRadius="8"
+        Padding="10,5"
+        Clicked="OnAddRowClicked"
+        CommandParameter="Building"/>
+
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Area" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Rate/Sq.ft" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3"  BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="RowsCollection" ItemsSource="{Binding BuildingRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                                        TextColor="Red"
+                                         CommandParameter="Building"
+                                        Grid.Column="5"
+                                        Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding BuildingTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 3  -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="MACHINERY DETAILS" 
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Add Row Button -->
+
+                        <Button Text="➕ Add Row"
+        BackgroundColor="{StaticResource AccentColor}"
+        TextColor="White"
+        HorizontalOptions="Start"
+        CornerRadius="8"
+        Padding="10,5"
+        Clicked="OnAddRowClicked"
+        CommandParameter="Machinery"/>
+
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Qty" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Rate" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3"  BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="RowsCollection1" ItemsSource="{Binding MachineryRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                            TextColor="Red"
+                            Grid.Column="5"
+                             CommandParameter="Machinery"
+                            Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding MachineryTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+
+                <!-- Expander 4 : Working Capital -->
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                            StrokeThickness="0"
+                            BackgroundColor="#DFF0D8"
+                            Padding="10"
+                            StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="Working Capital" 
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <ScrollView Orientation="Horizontal" HeightRequest="250">
+                        <StackLayout Spacing="0">
+
+                            <!-- Table Header -->
+                            <Grid ColumnSpacing="1" RowSpacing="1" BackgroundColor="White" Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Sr. No." Grid.Column="0"
+                               FontAttributes="Bold"
+                               Padding="5"
+                               VerticalTextAlignment="Center"/>
+
+                                <Label Text="Particulars" Grid.Column="1"
+                               FontAttributes="Bold"
+                               Padding="5"
+                               VerticalTextAlignment="Center"/>
+
+                                <Label Text="Amount in Rs." Grid.Column="2"
+                               FontAttributes="Bold"
+                               Padding="5"
+                               VerticalTextAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Orange Line -->
+                            <BoxView HeightRequest="3"
+                              BackgroundColor="{StaticResource AccentColor}"
+                             HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Rows -->
+                            <Grid ColumnSpacing="1" RowSpacing="1" BackgroundColor="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Row 1 -->
+                                <Label Text="1" Grid.Row="0" Grid.Column="0" Margin="5,0"/>
+                                <Entry Text="Preliminary &amp; Pre-operative Cost" 
+                               Grid.Row="0" Grid.Column="1" Margin="5,0"/>
+                                <Entry Placeholder="0" Keyboard="Numeric" 
+                               Grid.Row="0" Grid.Column="2" Margin="5,0"/>
+
+                                <!-- Row 2 -->
+                                <Label Text="2" Grid.Row="1" Grid.Column="0" Margin="5,0"/>
+                                <Entry Text="Furniture &amp; Fixtures" 
+                               Grid.Row="1" Grid.Column="1" Margin="5,0"/>
+                                <Entry Placeholder="0" Keyboard="Numeric" 
+                               Grid.Row="1" Grid.Column="2" Margin="5,0"/>
+
+                                <!-- Row 3 -->
+                                <Label Text="3" Grid.Row="2" Grid.Column="0" Margin="5,0"/>
+                                <Entry Text="Contingency / Others / Miscellaneous" 
+                               Grid.Row="2" Grid.Column="1" Margin="5,0"/>
+                                <Entry Placeholder="0" Keyboard="Numeric" 
+                               Grid.Row="2" Grid.Column="2" Margin="5,0"/>
+
+                                <!-- Total Row -->
+                                <Label Text="Total:" 
+                               FontAttributes="Bold"
+                               Grid.Row="3" Grid.Column="1" Margin="5,0"
+                               HorizontalTextAlignment="End"/>
+                                <Entry Text="0.00" Keyboard="Numeric"
+                               Grid.Row="3" Grid.Column="2" Margin="5,0"/>
+                            </Grid>
+                        </StackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+                <!-- Expander 5 : "Means Of Financing -->
+
+                <!-- Expander 6 -->
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="Means Of Financing"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Both">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#F5F5F5" Padding="5" RowDefinitions="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (%)" Grid.Column="2" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="2" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Row 1 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="1" Grid.Column="0" VerticalOptions="Center" 
+                           HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Own Contribution" Grid.Column="1"/>
+                                    <Entry Text="10" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 2 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="2" Grid.Column="0" VerticalOptions="Center" 
+                           HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Bank Finance" Grid.Column="1"/>
+                                    <Entry Text="90" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 3 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="3" Grid.Column="0" VerticalOptions="Center" 
+                           HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Margin Money (Govt. Subsidy)" Grid.Column="1"/>
+                                    <Entry Text="25" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 7  -->
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                    StrokeThickness="0"
+                    BackgroundColor="#DFF0D8"
+                    Padding="10"
+                     StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="DETAILS OF SALES " 
+                     FontAttributes="Bold"
+                     FontSize="16"
+                     TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Add Row Button -->
+                        <Button Text="➕ Add Row"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                HorizontalOptions="Start"
+                CornerRadius="8"
+                Padding="10,5"
+                Clicked="OnAddRowClicked"
+                CommandParameter="Sales"/>
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars of Products" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Rate/Sq.ft" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Quantity" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3"  BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="SalesCollection" ItemsSource="{Binding SalesRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                                                        CommandParameter="Sales"
+                              TextColor="Red"
+                              Grid.Column="5"
+                              Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding SalesTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 8  -->
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="RAW MATERIALS" 
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <Button Text="➕ Add Row"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                HorizontalOptions="Start"
+                CornerRadius="8"
+                Padding="10,5"
+                Clicked="OnAddRowClicked"
+                CommandParameter="Raw"/>
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars of Products" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Unit" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Rate / Unit" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Reqd. Unit" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="RawCollection1" ItemsSource="{Binding RawMaterialRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                                                        CommandParameter="Raw"
+                     TextColor="Red"
+                     Grid.Column="5"
+                     Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding RawTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 9  -->
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                            StrokeThickness="0"
+                            BackgroundColor="#DFF0D8"
+                            Padding="10"
+                             StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="WAGES" 
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Add Row Button -->
+                        <Button Text="➕ Add Row"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                HorizontalOptions="Start"
+                CornerRadius="8"
+                Padding="10,5"
+                Clicked="OnAddRowClicked"
+                CommandParameter="Wages"/>
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="No. of Workers" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Wages Per Month (Total Month 12)" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3" BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="WagesCollection" ItemsSource="{Binding WagesRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                                                        CommandParameter="Wages"
+                     TextColor="Red"
+                     Grid.Column="5"
+                     Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding WagesTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 10  -->
+                <toolkit:Expander  IsExpanded="True">
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="SALARY DETAILS" 
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Add Row Button -->
+                        <Button Text="➕ Add Row"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="White"
+                HorizontalOptions="Start"
+                CornerRadius="8"
+                Padding="10,5"
+                Clicked="OnAddRowClicked"
+                CommandParameter="Salary"/>
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#E6E6E6" Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="No. of Staff" Grid.Column="2" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Wages Per Month (Total Month 12)" Grid.Column="3" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount (Rs.)" Grid.Column="4" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Del" Grid.Column="5" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="3"  BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Rows -->
+                                <CollectionView x:Name="SalaryCollection" ItemsSource="{Binding SalaryRows}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnSpacing="1" Padding="5" BackgroundColor="White" Margin="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Sr No -->
+                                                <Label Text="{Binding SrNo}" Grid.Column="0" VerticalOptions="Center"/>
+
+                                                <!-- Particulars -->
+                                                <Entry Text="{Binding Particulars}" Grid.Column="1"/>
+
+                                                <!-- Area -->
+                                                <Entry Text="{Binding Area}" Grid.Column="2" Keyboard="Numeric"/>
+
+                                                <!-- Rate -->
+                                                <Entry Text="{Binding Rate}" Grid.Column="3" Keyboard="Numeric"/>
+
+                                                <!-- Amount -->
+                                                <Label Text="{Binding Amount}" Grid.Column="4" VerticalOptions="Center"/>
+
+                                                <!-- Delete -->
+                                                <Button Text="🗑"
+                                                        CommandParameter="Salary"
+                     TextColor="Red"
+                     Grid.Column="5"
+                     Clicked="OnDeleteClicked"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Total -->
+                        <HorizontalStackLayout Margin="0,10,0,0">
+                            <Label Text="Total:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Text="{Binding SalaryTotal}" FontAttributes="Bold" TextColor="Green" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 11 -->
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="POWER ESTIMATE AND OTHER EXPENDITURE"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- Power Requirement -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="*Power Requirement " 
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"/>
+                            <Entry Text="120" WidthRequest="100"/>
+                            <Label Text="HP / KW / W" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Table with Scroll -->
+                        <ScrollView Orientation="Both">
+                            <StackLayout Spacing="0">
+
+                                <!-- Table Header -->
+                                <Grid ColumnSpacing="1" BackgroundColor="#F5F5F5" Padding="5" RowDefinitions="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="Sr. No." Grid.Column="0" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Text="Particulars" Grid.Column="1" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Text="Cost" Grid.Column="2" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Text="Amount in Rs." Grid.Column="3" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Orange Line -->
+                                <BoxView HeightRequest="2"  BackgroundColor="{StaticResource AccentColor}" HorizontalOptions="FillAndExpand"/>
+
+                                <!-- Row 1 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="1" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Repair and Maintenance" Grid.Column="1"/>
+                                    <Entry Text="150" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="45000" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 2 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="2" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Power and Fuel" Grid.Column="1"/>
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 3 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="3" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Other Overhead Expenses" Grid.Column="1"/>
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 4 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="4" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Telephone Expenses" Grid.Column="1"/>
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 5 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="5" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <!--<Entry Text="Stationery & Postage" Grid.Column="1"/>-->
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 6 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="6" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <!--<Entry Text="Advertisement & Publicity" Grid.Column="1"/>-->
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 7 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="7" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Building Rent" Grid.Column="1"/>
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Row 8 -->
+                                <Grid ColumnSpacing="1" Padding="5" RowDefinitions="40" BackgroundColor="White" Margin="0,0,0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="8" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="Other Miscellaneous Expenditure" Grid.Column="1"/>
+                                    <Entry Text="0" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Entry Text="0" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                </Grid>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                        <!-- Value of Interest -->
+                        <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+                            <Label Text="*Value of Interest" 
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"/>
+                            <Entry Text="200" WidthRequest="100"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 12 -->
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="Depreciation "
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="12">
+
+                        <!-- First Row (On Building & On Machinery) -->
+                        <Grid ColumnSpacing="15" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- On Building -->
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="On Building " 
+                       TextColor="Red" 
+                       FontAttributes="Bold"/>
+                                <Entry Text="100" Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+
+                            <!-- On Machinery -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="On Machinery" 
+                       TextColor="Red" 
+                       FontAttributes="Bold"/>
+                                <Entry Text="100" Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <!-- Second Row (Pay Back Period & Project Implementation Period) -->
+                        <Grid ColumnSpacing="15" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Pay Back Period -->
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="Pay Back Period " 
+                       TextColor="Red" 
+                       FontAttributes="Bold"/>
+                                <Entry Text="100" Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+
+                            <!-- Project Implementation Period -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="Project Implementation Period " 
+                       TextColor="Red" 
+                       FontAttributes="Bold"/>
+                                <Entry Text="100" Keyboard="Numeric"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+
+                <!-- Expander 13 -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                         StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="INTRODUCTION OFFICE"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="Black"
+                       Grid.Column="0"/>
+
+                                <!-- Word Limit Info -->
+                                <Label Text="(In 500 Words)" 
+                       TextColor="Red"
+                       FontAttributes="Bold"
+                       Grid.Column="1"
+                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="8">
+
+                        <!-- Label -->
+                        <Label Text="INTRODUCTION OFFICE"
+               TextColor="Red"
+               FontAttributes="Bold"/>
+
+                        <!-- Multi-line Editor -->
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                            <Editor x:Name="IntroductionEditor29"
+                       Placeholder="Enter Introduction Office details"
+                       AutoSize="TextChanges"
+                       HeightRequest="150"
+                       Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                        </Frame>
+
+                        <!-- Word Count Info -->
+                        <Label 
+               Text="0 / 500 words"
+               FontSize="15"
+               TextColor="Gray"
+               HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 14 -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                            StrokeThickness="0"
+                            BackgroundColor="#DFF0D8"
+                            Padding="10"
+                             StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="ABOUT THE PROMOTER"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="Black"
+                       Grid.Column="0"/>
+
+                                <!-- Word Limit Info -->
+                                <Label Text="(In 500 Words)" 
+                       TextColor="Red"
+                       FontAttributes="Bold"
+                       Grid.Column="1"
+                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="8">
+
+                        <!-- Label -->
+                        <Label Text="INTRODUCTION OFFICE"
+               TextColor="Red"
+               FontAttributes="Bold"/>
+
+                        <!-- Multi-line Editor -->
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                            <Editor 
+            Placeholder="Enter Introduction Office details"
+            AutoSize="TextChanges"
+            HeightRequest="150"
+            Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                        </Frame>
+
+                        <!-- Word Count Info -->
+                        <Label 
+               Text="0 / 500 words"
+               FontSize="15"
+               TextColor="Gray"
+               HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 15 -->
+                <toolkit:Expander IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+            StrokeThickness="0"
+            BackgroundColor="#DFF0D8"
+            Padding="10"
+            StrokeShape="RoundRectangle 20,20,0,0">
+                            <Label Text="Implementing Agency"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+                        </Border>
+                    </toolkit:Expander.Header>
+                    <ScrollView>
+                        <!-- Content -->
+                        <VerticalStackLayout Padding="10" Spacing="12">
+
+                            <!-- Top dropdowns -->
+                            <Grid ColumnSpacing="10" RowSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Implementing Agency Dropdown -->
+                                <Picker Grid.Column="0"
+                                    Title="Implementing Agency"
+                                    ItemsSource="{Binding AgencyList}"
+                                    SelectedItem="{Binding SelectedAgency}"/>
+
+                                <!-- State Dropdown -->
+                                <Picker Grid.Column="1"
+                                    Title="State"
+                                    ItemsSource="{Binding StateList}"
+                                    SelectedItem="{Binding SelectedState}"/>
+
+                                <!-- District Dropdown -->
+                                <Picker Grid.Column="2"
+                                    Title="District"
+                                    ItemsSource="{Binding DistrictList}"
+                                    SelectedItem="{Binding SelectedDistrict}"/>
+                            </Grid>
+
+                            <!-- Agency Details Box -->
+                            <Border Stroke="LightGray" StrokeThickness="1" StrokeShape="RoundRectangle 5">
+                                <Grid ColumnSpacing="10" RowSpacing="6" Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Orange Accent Line -->
+                                    <BoxView Grid.RowSpan="6"
+                                     WidthRequest="4"
+                                     BackgroundColor="{StaticResource AccentColor}"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="FillAndExpand" />
+
+                                    <!-- Agency Name -->
+                                    <Label Grid.Column="1"
+                                       Text="Khadi and Village Industries Commission"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       TextColor="#2E6DA4"/>
+
+                                    <!-- Address -->
+                                    <Label Grid.Column="1" Grid.Row="1"
+           Text="2nd Floor, Mytri Willows, Sir Bazonji Mehta Road, Gandhi Sagar, Nagpur"/>
+
+                                    <!-- District -->
+                                    <Label Grid.Column="1" Grid.Row="2" Text="District: Nagpur"/>
+
+                                    <!-- Pin -->
+                                    <Label Grid.Column="1" Grid.Row="3" Text="Pin: "/>
+
+                                    <!-- State -->
+                                    <Label Grid.Column="1" Grid.Row="4" Text="State: Maharashtra"/>
+
+                                    <!-- Contact Info -->
+                                    <HorizontalStackLayout Grid.Column="1" Grid.Row="5" Spacing="20">
+                                        <Label Text="Ph No: 9865876457"/>
+                                        <Label Text="Email: demo@gmail.com"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                    </ScrollView>
+
+                </toolkit:Expander>
+
+                <!-- Expander 16 -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="INTRODUCTION"
+                                  FontAttributes="Bold"
+                                  FontSize="16"
+                                  TextColor="Black"
+                                  Grid.Column="0"/>
+
+                                <!-- Word Limit Info -->
+                                <Label Text="(In 500 Words)" 
+                                  TextColor="Red"
+                                  FontAttributes="Bold"
+                                  Grid.Column="1"
+                                  VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="8">
+
+                        <!-- Label -->
+                        <Label Text="INTRODUCTION OFFICE"
+                          TextColor="Red"
+                          FontAttributes="Bold"/>
+
+                        <!-- Multi-line Editor -->
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                            <Editor
+                          Placeholder="Enter Introduction Office details"
+                          AutoSize="TextChanges"
+                          HeightRequest="150"
+                          Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                        </Frame>
+
+                        <!-- Word Count Info -->
+                        <Label 
+                      Text="0 / 500 words"
+                      FontSize="15"
+                      TextColor="Gray"
+                      HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+                <!-- Expander 17 -->
+
+                <toolkit:Expander  IsExpanded="True">
+                    <!-- Header -->
+                    <toolkit:Expander.Header>
+                        <Border
+                        StrokeThickness="0"
+                        BackgroundColor="#DFF0D8"
+                        Padding="10"
+                        StrokeShape="RoundRectangle 20,20,0,0">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="ABOUT THE BENEFICIARY"
+                                  FontAttributes="Bold"
+                                  FontSize="16"
+                                  TextColor="Black"
+                                  Grid.Column="0"/>
+
+                                <!-- Word Limit Info -->
+                                <Label Text="(In 500 Words)" 
+                              TextColor="Red"
+                              FontAttributes="Bold"
+                              Grid.Column="1"
+                              VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </toolkit:Expander.Header>
+
+                    <!-- Content -->
+                    <VerticalStackLayout Padding="10" Spacing="8">
+
+                        <!-- Label -->
+                        <Label Text="INTRODUCTION OFFICE"
+                          TextColor="Red"
+                          FontAttributes="Bold"/>
+
+                        <!-- Multi-line Editor -->
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="2">
+                            <Editor 
+                           Placeholder="Enter Introduction Office details"
+                           AutoSize="TextChanges"
+                           HeightRequest="150"
+                           Text="mskdjfnjhdshgfsjufgsfsfsfv"/>
+                        </Frame>
+
+                        <!-- Word Count Info -->
+                        <Label
+                          Text="0 / 500 words"
+                          FontSize="15"
+                          TextColor="Gray"
+                          HorizontalOptions="End"/>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+
+
+        <!--llll-->
+        <ScrollView Grid.Row="4" x:Name="ScoreCardForm" IsVisible="False">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="ScoreCardFormhgjkkj" FontAttributes="Bold"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <!--<ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+
+                            -->
+                    <!-- Project Title -->
+                    <!--
+                            <Label Text="Project Title*" />
+                            <Entry Placeholder="Enter Project Title" />
+
+                            -->
+                    <!-- Estimated Cost -->
+                    <!--
+                            <Label Text="Estimated Cost*" />
+                            <Entry  Placeholder="Enter Estimated Cost" Keyboard="Numeric"/>
+
+                            -->
+                    <!-- DPR Details -->
+                    <!--
+                            <Label Text="DPR Description" />
+                            <Editor  Placeholder="Enter detailed DPR..." 
+                     AutoSize="TextChanges" />
+
+                            -->
+                    <!-- File Upload -->
+                    <!--
+                            <Button Text="UPLOAD DPR DOCUMENT" 
+                     BackgroundColor="Green" 
+                     TextColor="White" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>-->
+
+
+                </toolkit:Expander>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <ScrollView Grid.Row="4" x:Name="UploadDocument" IsVisible="False">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <!--<Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Part 2: DPR Form" FontAttributes="Bold"/>
+                        </Frame>-->
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+
+                            <!-- Project Title -->
+                            <Label Text="Project Title*" />
+                            <Entry Placeholder="Enter Project Title" />
+
+                            <!-- Estimated Cost -->
+                            <Label Text="Estimated Cost*" />
+                            <Entry  Placeholder="Enter Estimated Cost" Keyboard="Numeric"/>
+
+                            <!-- DPR Details -->
+                            <Label Text="DPR Description" />
+                            <Editor  Placeholder="Enter detailed DPR..." 
+               AutoSize="TextChanges" />
+
+                            <!-- File Upload -->
+                            <Button Text="UPLOAD DPR DOCUMENT" 
+               BackgroundColor="Green" 
+               TextColor="White" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <ScrollView Grid.Row="5" x:Name="FinalSubmission" IsVisible="False">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <!--<Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Part 2: DPR Form" FontAttributes="Bold"/>
+                        </Frame>-->
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+
+                            <!-- Project Title -->
+                            <Label Text="Project Title*" />
+                            <Entry Placeholder="Enter Project Title" />
+
+                            <!-- Estimated Cost -->
+                            <Label Text="Estimated Cost*" />
+                            <Entry  Placeholder="Enter Estimated Cost" Keyboard="Numeric"/>
+
+                            <!-- DPR Details -->
+                            <Label Text="DPR Description" />
+                            <Editor  Placeholder="Enter detailed DPR..." 
+                 AutoSize="TextChanges" />
+
+                            <!-- File Upload -->
+                            <Button Text="UPLOAD DPR DOCUMENT" 
+                 BackgroundColor="Green" 
+                 TextColor="White" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="6" x:Name="UnderProcess" IsVisible="False">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <!--<Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Part 2: DPR Form" FontAttributes="Bold"/>
+                        </Frame>-->
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+
+                            <!-- Project Title -->
+                            <Label Text="Project Title*" />
+                            <Entry Placeholder="Enter Project Title" />
+
+                            <!-- Estimated Cost -->
+                            <Label Text="Estimated Cost*" />
+                            <Entry  Placeholder="Enter Estimated Cost" Keyboard="Numeric"/>
+
+                            <!-- DPR Details -->
+                            <Label Text="DPR Description" />
+                            <Editor  Placeholder="Enter detailed DPR..." 
+        AutoSize="TextChanges" />
+
+                            <!-- File Upload -->
+                            <Button Text="UPLOAD DPR DOCUMENT" 
+        BackgroundColor="Green" 
+        TextColor="White" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="7" x:Name="LoanSanction" IsVisible="False">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <toolkit:Expander>
+                    <toolkit:Expander.Header>
+                        <!--<Frame BackgroundColor="#DFF0D8" Padding="10">
+                            <Label Text="Part 2: DPR Form" FontAttributes="Bold"/>
+                        </Frame>-->
+                    </toolkit:Expander.Header>
+
+                    <ScrollView HeightRequest="400">
+                        <VerticalStackLayout Padding="10" Spacing="10">
+
+                            <!-- Project Title -->
+                            <Label Text="Project Title*" />
+                            <Entry Placeholder="Enter Project Title" />
+
+                            <!-- Estimated Cost -->
+                            <Label Text="Estimated Cost*" />
+                            <Entry  Placeholder="Enter Estimated Cost" Keyboard="Numeric"/>
+
+                            <!-- DPR Details -->
+                            <Label Text="DPR Description" />
+                            <Editor  Placeholder="Enter detailed DPR..." 
+  AutoSize="TextChanges" />
+
+                            <!-- File Upload -->
+                            <Button Text="UPLOAD DPR DOCUMENT" 
+  BackgroundColor="Green" 
+  TextColor="White" />
+
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </toolkit:Expander>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+    </Grid>
+
+
+
+</ContentPage>
