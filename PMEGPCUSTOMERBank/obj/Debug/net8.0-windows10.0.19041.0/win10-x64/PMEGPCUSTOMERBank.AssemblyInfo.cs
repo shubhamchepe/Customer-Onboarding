@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PMEGPCUSTOMERBank")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+cf2f1529d0ece9b4c050d309385bf19226d1427a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+7dba41f77967cea5c9ea930d4c79cd39a5c8aeab")]
 [assembly: System.Reflection.AssemblyProductAttribute("PMEGPCUSTOMERBank")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PMEGPCUSTOMERBank")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,139 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = true
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0-android
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PMEGPCUSTOMERBank
+build_property.ProjectDir = C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/ApplicationForNewUnit.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.ApplicationForNewUnit.xaml
+build_metadata.AdditionalFiles.TargetPath = ApplicationForNewUnit.xaml
+build_metadata.AdditionalFiles.RelativePath = ApplicationForNewUnit.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/DashboardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.DashboardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = DashboardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = DashboardPage.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/DPRView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.DPRView.xaml
+build_metadata.AdditionalFiles.TargetPath = DPRView.xaml
+build_metadata.AdditionalFiles.RelativePath = DPRView.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/Homedashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.Homedashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = Homedashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = Homedashboard.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/Navbar.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.Navbar.xaml
+build_metadata.AdditionalFiles.TargetPath = Navbar.xaml
+build_metadata.AdditionalFiles.RelativePath = Navbar.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/PopUp/DistrictSelectionPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.PopUp.DistrictSelectionPage.xaml
+build_metadata.AdditionalFiles.TargetPath = PopUp\DistrictSelectionPage.xaml
+build_metadata.AdditionalFiles.RelativePath = PopUp\DistrictSelectionPage.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/PopUp/IndustryPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.PopUp.IndustryPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = PopUp\IndustryPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = PopUp\IndustryPopup.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/PopUp/IndustrySelectionPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.PopUp.IndustrySelectionPage.xaml
+build_metadata.AdditionalFiles.TargetPath = PopUp\IndustrySelectionPage.xaml
+build_metadata.AdditionalFiles.RelativePath = PopUp\IndustrySelectionPage.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/PopUp/OtpPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.PopUp.OtpPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = PopUp\OtpPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = PopUp\OtpPopup.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/RegisterApplicantDashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.RegisterApplicantDashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisterApplicantDashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisterApplicantDashboard.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/RegisteredApplicant.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.RegisteredApplicant.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisteredApplicant.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisteredApplicant.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/RegisteredApplicantsDashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.RegisteredApplicantsDashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisteredApplicantsDashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisteredApplicantsDashboard.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/RegisteredApplicantsDashboardView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.RegisteredApplicantsDashboardView.xaml
+build_metadata.AdditionalFiles.TargetPath = RegisteredApplicantsDashboardView.xaml
+build_metadata.AdditionalFiles.RelativePath = RegisteredApplicantsDashboardView.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/RegistredApplicantLogin.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.RegistredApplicantLogin.xaml
+build_metadata.AdditionalFiles.TargetPath = RegistredApplicantLogin.xaml
+build_metadata.AdditionalFiles.RelativePath = RegistredApplicantLogin.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/TRUST/source/repos/PmegpBank/PGMBank-trust/PMEGPCUSTOMERBank/ScoreCardView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PMEGPCUSTOMERBank.ScoreCardView.xaml
+build_metadata.AdditionalFiles.TargetPath = ScoreCardView.xaml
+build_metadata.AdditionalFiles.RelativePath = ScoreCardView.xaml

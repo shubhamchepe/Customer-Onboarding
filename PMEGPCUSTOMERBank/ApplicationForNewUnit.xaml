@@ -184,8 +184,14 @@
                         <Entry  IsReadOnly="True"  x:Name="txtAge" Placeholder="Age" Keyboard="Numeric" />
 
                         <!-- Gender -->
-                        <Label Text="Gender"/>
-                        <Entry  x:Name="genderPicker" IsReadOnly="True" Placeholder="Gender"  />
+                        <!-- REPLACE this if it's an Entry: -->
+                       
+
+                        <!-- WITH this Picker: -->
+                        <Picker x:Name="genderPicker"
+                          Title="Select Gender"
+                          ItemDisplayBinding="{Binding LKDescription}"
+                          HorizontalOptions="FillAndExpand"/>
 
 
 
@@ -238,11 +244,11 @@
                     <VerticalStackLayout Padding="10" Spacing="10">
                         <Entry x:Name="comnAddressEntry" Placeholder="Communication address" />
                         <Label Text="Select State" />
-                        <Picker x:Name="statePicker"
-                        Title="Select State"
-                         SelectedIndexChanged="OnStateSelected"
-                        SelectedIndex="0">
-                                        </Picker>
+                        <Picker x:Name="statePicker" 
+        Title="Select State"
+        ItemDisplayBinding="{Binding State_Name}"
+        SelectedIndexChanged="OnStateSelected"
+        HorizontalOptions="FillAndExpand" />
 
                         <Label Text="District" />
                         <Entry  x:Name="districtEntry" Placeholder="District" IsReadOnly="True" />
@@ -304,20 +310,7 @@
                          ItemDisplayBinding="{Binding Agency_Code}" />
 
 
-                        <Label Text="Select State" />
-                        <Picker x:Name="statePickerforAgency"
-  
-                           ItemDisplayBinding="{Binding State_Name}" 
-                          SelectedIndexChanged="GetDistrictByState"
-                         SelectedIndex="0">
-                        </Picker>
-
-                        <Label Text="Select District" />
-                        <Picker x:Name="districtPicker1"
-                           SelectedIndexChanged="DistrictPicker1_SelectedIndexChanged"
-           
-                         Title="Select District"
-                         ItemDisplayBinding="{Binding District_Name}" />
+                        
 
                         <Frame x:Name="agencyDetailsLayout"
                           IsVisible="False"
@@ -383,6 +376,20 @@
                 <!-- Scrollable content -->
                 <ScrollView HeightRequest="400">
                     <VerticalStackLayout Spacing="10" Padding="10">
+
+                        <Label Text="Select State" />
+                        <Picker x:Name="statePickerforAgency" 
+  Title="Select State"
+  ItemDisplayBinding="{Binding State_Name}"
+  SelectedIndexChanged="GetDistrictByState"
+  HorizontalOptions="FillAndExpand" />
+
+                        <Label Text="Select District" />
+                        <Picker x:Name="districtPicker1"
+   SelectedIndexChanged="DistrictPicker1_SelectedIndexChanged"
+           
+ Title="Select District"
+ ItemDisplayBinding="{Binding District_Name}" />
 
                         <!-- District -->
                         <Label Text="District" />

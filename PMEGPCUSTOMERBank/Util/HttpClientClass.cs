@@ -9,80 +9,73 @@ namespace PMEGPCUSTOMERBank.Util
             Timeout = TimeSpan.FromSeconds(30)
         };
 
-        public static async Task<string> PostAsyncTask(string apiUrl, string jsonString)
+        public static async Task<string> PostAsyncTask(string url, string jsonContent)
         {
             try
             {
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(apiUrl, content);
+                var handler = new HttpClientHandler();
 
-                // Read the raw response first
-                string responseBody = await response.Content.ReadAsStringAsync();
+#if DEBUG
+                // Bypass SSL for local development
+                handler.ServerCertificateCustomValidationCallback =
+                    (message, cert, chain, errors) => true;
+#endif
 
-                // Check if response is successful
-                if (!response.IsSuccessStatusCode)
-                {
-                    System.Diagnostics.Debug.WriteLine($"API Error: {response.StatusCode}");
-                    System.Diagnostics.Debug.WriteLine($"Response: {responseBody}");
+                using var client = new HttpClient(handler);
+                client.Timeout = TimeSpan.FromSeconds(30);
 
-                    // Return empty JSON array or object based on expected type
-                    return "[]"; // or "{}" depending on what your code expects
-                }
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
 
-                // Validate if response is JSON
-                if (string.IsNullOrWhiteSpace(responseBody) ||
-                    (!responseBody.TrimStart().StartsWith("{") && !responseBody.TrimStart().StartsWith("[")))
-                {
-                    System.Diagnostics.Debug.WriteLine($"Invalid JSON Response: {responseBody}");
-                    return "[]"; // Return empty array as fallback
-                }
-
-                return responseBody;
-            }
-            catch (HttpRequestException ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Network Error: {ex.Message}");
-                return "[]";
-            }
-            catch (TaskCanceledException ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Request Timeout: {ex.Message}");
-                return "[]";
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Unexpected Error: {ex.Message}");
-                return "[]";
+                System.Diagnostics.Debug.WriteLine($"❌ HTTP Error: {ex.Message}");
+                throw;
             }
         }
 
-        public static async Task<string> GetStateAsyncTask(string apiUrl)
+        // In HttpClientClass (Util folder)
+        public static async Task<string> GetStateAsyncTask(string url)
         {
             try
             {
-                var response = await client.GetAsync(apiUrl);
-                string responseBody = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"📤 GET Request: {url}");
+
+                var handler = new HttpClientHandler();
+
+#if DEBUG
+                // Bypass SSL for local development
+                handler.ServerCertificateCustomValidationCallback =
+                    (message, cert, chain, errors) => true;
+#endif
+
+                using var client = new HttpClient(handler);
+                client.Timeout = TimeSpan.FromSeconds(30);
+
+                var response = await client.GetAsync(url);
+
+                System.Diagnostics.Debug.WriteLine($"📥 Response Status: {response.StatusCode}");
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    System.Diagnostics.Debug.WriteLine($"API Error: {response.StatusCode}");
-                    return "[]";
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine($"❌ Error Response: {errorContent}");
+                    throw new Exception($"API returned {response.StatusCode}");
                 }
 
-                // Validate JSON
-                if (string.IsNullOrWhiteSpace(responseBody) ||
-                    (!responseBody.TrimStart().StartsWith("{") && !responseBody.TrimStart().StartsWith("[")))
-                {
-                    System.Diagnostics.Debug.WriteLine($"Invalid JSON Response: {responseBody}");
-                    return "[]";
-                }
+                string result = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"📥 Response: {result.Substring(0, Math.Min(200, result.Length))}...");
 
-                return responseBody;
+                return result;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in GetStateAsyncTask: {ex.Message}");
-                return "[]";
+                System.Diagnostics.Debug.WriteLine($"❌ GetStateAsyncTask Error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"❌ Stack Trace: {ex.StackTrace}");
+                throw;
             }
         }
 

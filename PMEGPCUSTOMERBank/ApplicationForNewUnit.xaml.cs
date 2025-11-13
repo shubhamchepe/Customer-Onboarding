@@ -34,29 +34,44 @@ public partial class ApplicationForNewUnit : ContentPage
     public ICommand DeleteCommand { get; set; }
     public ApplicationForNewUnit()
     {
-        // _selectedIndustries = selected;
-
         InitializeComponent();
-        //GetGender();
-        GetSocialCategory();
-        GetSpecialCategory();
-        GetQualification();
-        GetState();
-        GetAgency();
-        LoadSchemes();
-
-        GetBankList();
-        GetinfoSources();
-
-        // SubmitForm();
-        LoadTitles();
-
 
         SelectedIndustries = new ObservableCollection<Modal.NICModel>();
         DeleteCommand = new Command<Modal.NICModel>(OnDeleteIndustry);
         BindingContext = this;
 
+        // ✅ Load data asynchronously
+        _ = LoadInitialDataAsync();
+    }
 
+    private async Task LoadInitialDataAsync()
+    {
+        try
+        {
+            System.Diagnostics.Debug.WriteLine("🔄 Loading initial data...");
+
+            // ✅ Run all in parallel for faster loading
+            await Task.WhenAll(
+                GetGender(),
+                GetSocialCategory(),
+                GetSpecialCategory(),
+                GetQualification(),
+                GetState(),
+                GetAgency(),
+                LoadSchemes(),
+                GetBankList(),
+                GetinfoSources()
+            );
+
+            LoadTitles(); // Synchronous - runs immediately
+
+            System.Diagnostics.Debug.WriteLine("✅ All data loaded successfully");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ LoadInitialDataAsync Error: {ex.Message}");
+            await DisplayAlert("Error", $"Failed to load initial data: {ex.Message}", "OK");
+        }
     }
     private void OnCostChanged(object sender, TextChangedEventArgs e)
     {
@@ -151,7 +166,8 @@ public partial class ApplicationForNewUnit : ContentPage
             string ApplName = txtApplicantName.Text?.Trim();
             string DateofBirth = txtDOB.Text?.Trim();
             string Age = txtAge.Text?.Trim();
-            string Gender = genderPicker.Text?.Trim() ?? string.Empty;
+            // ✅ CORRECT
+            string Gender = (genderPicker.SelectedItem as GenderModel)?.LKDescription ?? string.Empty;
 
             var socialCat = socialCategoryPicker.SelectedItem as GenderModel;
             string SocialCatID = socialCat?.LKDescription;
@@ -731,6 +747,16 @@ public partial class ApplicationForNewUnit : ContentPage
             string jsonString1 = $"{{\"aadhaarNo\":\"{adharNo}\"}}";
 
             string getData1 = await HttpClientClass.PostAsyncTask(apiUrl1, jsonString1);
+            // Add after receiving getData1
+            System.Diagnostics.Debug.WriteLine($"API Response: {getData1}");
+
+            // If response is "[]" or starts with "[", handle it:
+            if (getData1.TrimStart().StartsWith("["))
+            {
+                await DisplayAlert("Error", "Invalid Aadhaar number or API returned empty result", "OK");
+                return;
+            }
+
             var json1 = JObject.Parse(getData1);
 
             // ✅ FIXED: Check success at root level
@@ -811,11 +837,23 @@ public partial class ApplicationForNewUnit : ContentPage
                         txtAge.Text = age.ToString();
                     }
 
-                    // Set gender - FIXED
+                    // ✅ FIXED: Set gender using SelectedItem
                     if (!string.IsNullOrEmpty(AppConstants.Gender))
                     {
                         string gender = AppConstants.Gender.ToUpper();
-                        genderPicker.Text = gender == "M" ? "Male" : gender == "F" ? "Female" : "Transgender";
+                        string genderText = gender == "M" ? "Male" :
+                                           gender == "F" ? "Female" :
+                                           "Transgender";
+
+                        if (genderPicker.ItemsSource is IEnumerable<GenderModel> genderList)
+                        {
+                            var matchedGender = genderList.FirstOrDefault(g =>
+                                g.LKDescription != null &&
+                                g.LKDescription.Equals(genderText, StringComparison.OrdinalIgnoreCase));
+
+                            if (matchedGender != null)
+                                genderPicker.SelectedItem = matchedGender;
+                        }
                     }
 
                     // Set state
@@ -848,35 +886,48 @@ public partial class ApplicationForNewUnit : ContentPage
     }
 
 
-    //private async Task GetGender()
-    //{
-    //    try
-    //    {
-    //        string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetGender";
-    //        string jsonString = "{\"mainCode\":\"GEND\"}";
+    private async Task GetGender()
+    {
+        try
+        {
+            System.Diagnostics.Debug.WriteLine("🔵 GetGender: Starting...");
 
-    //        string response = await HttpClientClass.PostAsyncTask(apiUrl, jsonString);
+            string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetGender";
+            System.Diagnostics.Debug.WriteLine($"🔵 GetGender: URL = {apiUrl}");
 
-    //        var genderList = JsonConvert.DeserializeObject<List<GenderModel>>(response);
+            string jsonString = "{\"mainCode\":\"GEND\"}";
+            System.Diagnostics.Debug.WriteLine($"🔵 GetGender: Request = {jsonString}");
 
-    //        if (genderList != null && genderList.Count > 0)
-    //        {
-    //            genderList.Insert(0, new GenderModel { LKDescription = "Select Gender", GenderCode = "" });
+            string response = await HttpClientClass.PostAsyncTask(apiUrl, jsonString);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetGender: Response = {response}");
 
-    //            // ✅ FIXED: Uncommented and added to UI thread
-    //            MainThread.BeginInvokeOnMainThread(() =>
-    //            {
-    //                genderPicker.ItemsSource = genderList;
-    //                genderPicker.ItemDisplayBinding = new Binding("LKDescription");
-    //                genderPicker.SelectedIndex = 0;
-    //            });
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        await DisplayAlert("Error", $"Failed to load genders: {ex.Message}", "OK");
-    //    }
-    //}
+            var genderList = JsonConvert.DeserializeObject<List<GenderModel>>(response);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetGender: Deserialized {genderList?.Count ?? 0} items");
+
+            if (genderList != null && genderList.Count > 0)
+            {
+                genderList.Insert(0, new GenderModel { LKDescription = "Select Gender", GenderCode = "" });
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    genderPicker.ItemsSource = genderList;
+                    genderPicker.ItemDisplayBinding = new Binding("LKDescription");
+                    genderPicker.SelectedIndex = 0;
+                    System.Diagnostics.Debug.WriteLine("✅ GetGender: UI Updated Successfully");
+                });
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ GetGender: No data received");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ GetGender Error: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"❌ Stack Trace: {ex.StackTrace}");
+            await DisplayAlert("Error", $"Failed to load genders: {ex.Message}", "OK");
+        }
+    }
     private async Task GetSocialCategory()
     {
         try
@@ -966,48 +1017,130 @@ public partial class ApplicationForNewUnit : ContentPage
 
     private async Task GetState()
     {
-        string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetStates";
+        try
+        {
+            System.Diagnostics.Debug.WriteLine("🔵 GetState: Starting...");
 
-        string response = await HttpClientClass.GetStateAsyncTask(apiUrl);
+            string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetStates";
+            System.Diagnostics.Debug.WriteLine($"🔵 GetState: URL = {apiUrl}");
 
-        // Deserialize JSON array into List<StateModel>
-        var stateList = JsonConvert.DeserializeObject<List<StateModel>>(response);
+            // Verify AppIP is set
+            if (string.IsNullOrEmpty(AppConstants.AppIP))
+            {
+                System.Diagnostics.Debug.WriteLine("❌ GetState: AppIP is NULL or empty!");
+                await DisplayAlert("Error", "API URL not configured", "OK");
+                return;
+            }
 
-        // Insert default option at the top
-        stateList.Insert(0, new StateModel { State_Name = "Select State", State_Code = "" });
+            string response = await HttpClientClass.GetStateAsyncTask(apiUrl);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetState: Response received, length = {response?.Length ?? 0}");
 
-        // Bind to Picker
-        statePicker.ItemsSource = stateList;
-        statePicker.ItemDisplayBinding = new Binding("State_Name");
-        statePicker.SelectedIndex = 0;
+            // Check if response is empty
+            if (string.IsNullOrWhiteSpace(response))
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ GetState: Empty response from API");
+                await DisplayAlert("Error", "No data received from server", "OK");
+                return;
+            }
 
-        statePickerforAgency.ItemsSource = stateList;
-        statePickerforAgency.ItemDisplayBinding = new Binding("State_Name");
-        statePickerforAgency.SelectedIndex = 0;
+            // Deserialize JSON array into List<StateModel>
+            var stateList = JsonConvert.DeserializeObject<List<StateModel>>(response);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetState: Deserialized {stateList?.Count ?? 0} states");
 
+            if (stateList == null || stateList.Count == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ GetState: Deserialization returned empty list");
+                await DisplayAlert("Error", "No states found", "OK");
+                return;
+            }
 
+            // Insert default option at the top
+            stateList.Insert(0, new StateModel { State_Name = "Select State", State_Code = "", State_ID = 0 });
+            System.Diagnostics.Debug.WriteLine($"🔵 GetState: Added default option, total = {stateList.Count}");
+
+            // Update UI on main thread
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("🔵 GetState: Updating UI...");
+
+                    // Verify pickers exist
+                    if (statePicker == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("❌ GetState: statePicker is NULL!");
+                        return;
+                    }
+
+                    if (statePickerforAgency == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("❌ GetState: statePickerforAgency is NULL!");
+                        return;
+                    }
+
+                    // Communication Address State Picker
+                    statePicker.ItemsSource = stateList;
+                    statePicker.ItemDisplayBinding = new Binding("State_Name");
+                    statePicker.SelectedIndex = 0;
+                    System.Diagnostics.Debug.WriteLine("✅ GetState: statePicker updated");
+
+                    // Implementing Agency State Picker
+                    statePickerforAgency.ItemsSource = stateList;
+                    statePickerforAgency.ItemDisplayBinding = new Binding("State_Name");
+                    statePickerforAgency.SelectedIndex = 0;
+                    System.Diagnostics.Debug.WriteLine("✅ GetState: statePickerforAgency updated");
+
+                    System.Diagnostics.Debug.WriteLine("✅ GetState: All pickers updated successfully");
+                }
+                catch (Exception uiEx)
+                {
+                    System.Diagnostics.Debug.WriteLine($"❌ GetState UI Update Error: {uiEx.Message}");
+                }
+            });
+        }
+        catch (JsonException jsonEx)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ GetState JSON Error: {jsonEx.Message}");
+            await DisplayAlert("Error", "Invalid data format received from server", "OK");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ GetState Error: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"❌ Stack Trace: {ex.StackTrace}");
+            await DisplayAlert("Error", $"Failed to load states: {ex.Message}", "OK");
+        }
     }
 
     private async void OnStateSelected(object sender, EventArgs e)
     {
-        var picker = sender as Picker;
-
-        // Do not do anything on default selection
-        if (picker.SelectedItem == null || picker.SelectedIndex == 0)
-            return;
-
-        if (picker.SelectedIndex > 0) // 0 is "Select State"
+        try
         {
+            var picker = sender as Picker;
+
+            System.Diagnostics.Debug.WriteLine($"🔵 OnStateSelected: SelectedIndex = {picker?.SelectedIndex}");
+
+            // Do not do anything on default selection
+            if (picker == null || picker.SelectedItem == null || picker.SelectedIndex == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ OnStateSelected: Default selection, skipping");
+                return;
+            }
+
             var selectedState = picker.SelectedItem as StateModel;
 
             if (selectedState != null)
             {
                 string stateCode = selectedState.State_Code;
+                System.Diagnostics.Debug.WriteLine($"🔵 OnStateSelected: Selected {selectedState.State_Name} (Code: {stateCode})");
 
-                Console.WriteLine($"➡️ Selected State: {selectedState.State_Name}, Code: {stateCode}");
-
-
+                // You can add district loading logic here if needed
+                // await LoadDistrictsForCommunicationAddress(stateCode);
             }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ OnStateSelected Error: {ex.Message}");
+            await DisplayAlert("Error", ex.Message, "OK");
         }
     }
     private async void OnChangeDistrictClicked(object sender, EventArgs e)
@@ -1206,42 +1339,72 @@ public partial class ApplicationForNewUnit : ContentPage
 
     private async void GetDistrictByState(object sender, EventArgs e)
     {
-
-        var picker = sender as Picker;
-
-        // Do not do anything on default selection
-        if (picker.SelectedItem == null || picker.SelectedIndex == 0)
-            return;
-        string stateCode = (statePickerforAgency.SelectedItem as StateModel)?.State_Code;
-
-        if (string.IsNullOrEmpty(stateCode))
+        try
         {
-            await DisplayAlert("Error", "Please select a state first.", "OK");
-            return;
+            var picker = sender as Picker;
+
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: SelectedIndex = {picker?.SelectedIndex}");
+
+            // Do not do anything on default selection
+            if (picker == null || picker.SelectedItem == null || picker.SelectedIndex == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ GetDistrictByState: Default selection, skipping");
+                return;
+            }
+
+            string stateCode = (statePickerforAgency.SelectedItem as StateModel)?.State_Code;
+
+            if (string.IsNullOrEmpty(stateCode))
+            {
+                System.Diagnostics.Debug.WriteLine("❌ GetDistrictByState: State code is empty");
+                await DisplayAlert("Error", "Please select a state first.", "OK");
+                return;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: Loading districts for state code: {stateCode}");
+
+            string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetDistricts";
+            string jsonString = $"{{\"State_Code\":\"{stateCode}\"}}";
+
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: URL = {apiUrl}");
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: Payload = {jsonString}");
+
+            string response = await HttpClientClass.PostAsyncTask(apiUrl, jsonString);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: Response received");
+
+            var districtList = JsonConvert.DeserializeObject<List<DistrictModel>>(response);
+            System.Diagnostics.Debug.WriteLine($"🔵 GetDistrictByState: Deserialized {districtList?.Count ?? 0} districts");
+
+            if (districtList == null || districtList.Count == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ GetDistrictByState: No districts found");
+                await DisplayAlert("Info", "No districts found for selected state", "OK");
+                return;
+            }
+
+            // Insert default option at the top
+            districtList.Insert(0, new DistrictModel { District_Name = "Select District", District_Code = "" });
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                // Bind to implementing agency district picker
+                districtPicker1.ItemsSource = districtList;
+                districtPicker1.ItemDisplayBinding = new Binding("District_Name");
+                districtPicker1.SelectedIndex = 0;
+
+                // Also bind to unit address district picker
+                districtPicker.ItemsSource = districtList;
+                districtPicker.ItemDisplayBinding = new Binding("District_Name");
+                districtPicker.SelectedIndex = 0;
+
+                System.Diagnostics.Debug.WriteLine("✅ GetDistrictByState: District pickers updated");
+            });
         }
-
-        string apiUrl = $"{AppConstants.AppIP}/MobileApp/GetDistricts";
-        string jsonString = $"{{\"State_Code\":\"{stateCode}\"}}";
-
-        string response = await HttpClientClass.PostAsyncTask(apiUrl, jsonString);
-
-        var districtList = JsonConvert.DeserializeObject<List<DistrictModel>>(response);
-
-        // Insert default option at the top
-        districtList.Insert(0, new DistrictModel { District_Name = "Select District", District_Code = "" });
-
-        // Bind to Picker
-        districtPicker1.ItemsSource = districtList;
-        districtPicker1.ItemDisplayBinding = new Binding("District_Name");
-        districtPicker1.SelectedIndex = 0;
-
-
-        districtPicker.ItemsSource = districtList;
-        districtPicker.ItemDisplayBinding = new Binding("District_Name");
-        districtPicker.SelectedIndex = 0;
-
-
-
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"❌ GetDistrictByState Error: {ex.Message}");
+            await DisplayAlert("Error", $"Failed to load districts: {ex.Message}", "OK");
+        }
     }
 
     // Agency Picker

@@ -40,32 +40,29 @@
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\padlock.scale-100.png">
-      <PackagePath>padlock.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
+      <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\login.scale-100.png">
-      <PackagePath>login.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
+      <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\arrow.scale-100.png">
-      <PackagePath>arrow.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
+      <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\refresh.scale-100.png">
-      <PackagePath>refresh.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
+      <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image8.scale-100.png">
-      <PackagePath>image8.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
+      <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\gift_present_5113.scale-100.png">
-      <PackagePath>gift_present_5113.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\MauiMaterialAssets.ttf">
+      <PackagePath>MauiMaterialAssets.ttf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\right.scale-100.png">
-      <PackagePath>right.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
+      <PackagePath>OpenSans-Regular.ttf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\map.scale-100.png">
-      <PackagePath>map.scale-100.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\back.scale-100.png">
-      <PackagePath>back.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Semibold.ttf">
+      <PackagePath>OpenSans-Semibold.ttf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
@@ -205,29 +202,56 @@
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\modi.scale-100.png">
-      <PackagePath>modi.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\user.scale-100.png">
+      <PackagePath>user.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image1.scale-100.jpg">
-      <PackagePath>image1.scale-100.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\right.scale-100.png">
+      <PackagePath>right.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\rightarrow.scale-100.png">
-      <PackagePath>rightarrow.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\login.scale-100.png">
+      <PackagePath>login.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image2.scale-100.jpg">
-      <PackagePath>image2.scale-100.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\arrow.scale-100.png">
+      <PackagePath>arrow.scale-100.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\upload.scale-100.png">
       <PackagePath>upload.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image4.scale-100.jpg">
-      <PackagePath>image4.scale-100.jpg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\rightarrow.scale-100.png">
+      <PackagePath>rightarrow.scale-100.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\user.scale-100.png">
-      <PackagePath>user.scale-100.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\refresh.scale-100.png">
+      <PackagePath>refresh.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\map.scale-100.png">
+      <PackagePath>map.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\gift_present_5113.scale-100.png">
+      <PackagePath>gift_present_5113.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\modi.scale-100.png">
+      <PackagePath>modi.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image8.scale-100.png">
+      <PackagePath>image8.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\padlock.scale-100.png">
+      <PackagePath>padlock.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\back.scale-100.png">
+      <PackagePath>back.scale-100.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image3.scale-100.jpg">
       <PackagePath>image3.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image4.scale-100.jpg">
+      <PackagePath>image4.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image1.scale-100.jpg">
+      <PackagePath>image1.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\image2.scale-100.jpg">
+      <PackagePath>image2.scale-100.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>

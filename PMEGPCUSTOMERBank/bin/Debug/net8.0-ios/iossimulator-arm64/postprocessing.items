@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="PMEGPCUSTOMERBank.app/PMEGPCUSTOMERBank">
+      <IsAppExtension>false</IsAppExtension>
+      <BCSymbolMapName>PMEGPCUSTOMERBank.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>PMEGPCUSTOMERBank.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>\Users\android\Library\Caches\Xamarin\mtbs\builds\PMEGPCUSTOMERBank\176ff9d6f7d6d0822fc48381d555d7bf04b009b68359deb46eec1f0b938dc3bd\obj\Debug\net8.0-ios\iossimulator-arm64\mtouch-symbols.list</SymbolFile>
+      <DSymName>PMEGPCUSTOMERBank.app.dSYM</DSymName>
+      <SourceProjectPath>C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank</SourceProjectPath>
+      <IsXPCService></IsXPCService>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

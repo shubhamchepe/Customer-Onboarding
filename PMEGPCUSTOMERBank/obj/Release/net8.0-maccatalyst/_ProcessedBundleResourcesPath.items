@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\refresh.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\image8.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\back.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\user.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\upload.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\padlock.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\login.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\gift_present_5113.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\map.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\arrow.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\right.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\modi.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\image1.jpg" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\rightarrow.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\image3.jpg" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\image2.jpg" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\Resources\image4.jpg" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\dotnet_bot@3x.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\dotnet_bot@2x.png" />
+    <BundleResource Include="C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-maccatalyst\resizetizer\r\dotnet_bot.png" />
+    <BundleResource Include="obj\Release\net8.0-maccatalyst\resizetizer\f\MauiMaterialAssets.ttf" />
+    <BundleResource Include="obj\Release\net8.0-maccatalyst\resizetizer\f\OpenSans-Regular.ttf" />
+    <BundleResource Include="obj\Release\net8.0-maccatalyst\resizetizer\f\OpenSans-Semibold.ttf" />
+  </ItemGroup>
+</Project>
