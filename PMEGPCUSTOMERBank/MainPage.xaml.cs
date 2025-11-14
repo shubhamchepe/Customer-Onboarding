@@ -7,7 +7,7 @@ namespace PMEGPCUSTOMERBank
         public MainPage()
         {
             InitializeComponent();
-            AppConstants.AppIP = "https://192.168.0.16:8054";
+            AppConstants.AppIP = "https://115.124.125.153";
 
             NavigateToHome();
         }

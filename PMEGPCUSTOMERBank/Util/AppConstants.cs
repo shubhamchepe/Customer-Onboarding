@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PMEGPCUSTOMERBank.Util
+﻿namespace PMEGPCUSTOMERBank.Util
 {
     public class AppConstants
     {
@@ -27,7 +21,7 @@ namespace PMEGPCUSTOMERBank.Util
         public static string Street { get; set; }
         public static string House { get; set; }
         public static string Ret { get; set; }
-       
+
 
 
 

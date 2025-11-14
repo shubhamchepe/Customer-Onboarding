@@ -76,6 +76,7 @@ obj\Release\net8.0-android\android-x86\aot\System.Diagnostics.Process.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.Diagnostics.TraceSource.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.Drawing.Primitives.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.Drawing.dll.so
+obj\Release\net8.0-android\android-x86\aot\System.Formats.Asn1.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.IO.Compression.Brotli.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.IO.Compression.dll.so
 obj\Release\net8.0-android\android-x86\aot\System.Linq.Expressions.dll.so

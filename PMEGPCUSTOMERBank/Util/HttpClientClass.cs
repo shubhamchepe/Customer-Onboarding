@@ -15,11 +15,10 @@ namespace PMEGPCUSTOMERBank.Util
             {
                 var handler = new HttpClientHandler();
 
-#if DEBUG
-                // Bypass SSL for local development
+                // ⚠️ WARNING: This bypasses SSL for ALL builds
+                // Only use this if you control the server and it's internal/testing
                 handler.ServerCertificateCustomValidationCallback =
                     (message, cert, chain, errors) => true;
-#endif
 
                 using var client = new HttpClient(handler);
                 client.Timeout = TimeSpan.FromSeconds(30);
@@ -37,7 +36,6 @@ namespace PMEGPCUSTOMERBank.Util
             }
         }
 
-        // In HttpClientClass (Util folder)
         public static async Task<string> GetStateAsyncTask(string url)
         {
             try
@@ -46,11 +44,9 @@ namespace PMEGPCUSTOMERBank.Util
 
                 var handler = new HttpClientHandler();
 
-#if DEBUG
-                // Bypass SSL for local development
+                // ⚠️ WARNING: This bypasses SSL for ALL builds
                 handler.ServerCertificateCustomValidationCallback =
                     (message, cert, chain, errors) => true;
-#endif
 
                 using var client = new HttpClient(handler);
                 client.Timeout = TimeSpan.FromSeconds(30);
@@ -83,6 +79,15 @@ namespace PMEGPCUSTOMERBank.Util
         {
             try
             {
+                var handler = new HttpClientHandler();
+
+                // ⚠️ WARNING: This bypasses SSL for ALL builds
+                handler.ServerCertificateCustomValidationCallback =
+                    (message, cert, chain, errors) => true;
+
+                using var client = new HttpClient(handler);
+                client.Timeout = TimeSpan.FromSeconds(30);
+
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(apiUrl, content);
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -93,7 +98,6 @@ namespace PMEGPCUSTOMERBank.Util
                     return "{}";
                 }
 
-                // Validate JSON
                 if (string.IsNullOrWhiteSpace(responseBody) ||
                     (!responseBody.TrimStart().StartsWith("{") && !responseBody.TrimStart().StartsWith("[")))
                 {

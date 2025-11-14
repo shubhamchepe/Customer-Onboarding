@@ -30,6 +30,7 @@ com.google.android.material.appbar.AppBarLayout;C:\Users\TRUST\source\repos\Pmeg
 com.google.android.material.appbar.AppBarLayout;C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-android\lp\170\jl\res\layout\navigationlayout.xml
 com.google.android.material.appbar.MaterialToolbar;C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-android\lp\167\jl\res\layout\toolbar.xml
 com.google.android.material.tabs.TabLayout;C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-android\lp\167\jl\res\layout\tabbar.xml
+debug-overrides;obj\Release\net8.0-android\res\xml\network_security_config.xml
 declare-styleable;C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-android\lp\167\jl\res\values\attrs.xml
 declare-styleable;C:\Users\TRUST\source\repos\PmegpBank\PGMBank-trust\PMEGPCUSTOMERBank\obj\Release\net8.0-android\lp\170\jl\res\values\attr.xml
 domain;obj\Release\net8.0-android\res\xml\network_security_config.xml

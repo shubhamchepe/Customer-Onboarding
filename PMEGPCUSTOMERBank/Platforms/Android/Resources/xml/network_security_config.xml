@@ -1,12 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+	<!-- Allow cleartext (HTTP) traffic for all domains -->
 	<base-config cleartextTrafficPermitted="true">
 		<trust-anchors>
 			<certificates src="system" />
 			<certificates src="user" />
 		</trust-anchors>
 	</base-config>
+
+	<!-- Specific configuration for your API server -->
 	<domain-config cleartextTrafficPermitted="true">
-		<domain includeSubdomains="true">192.168.0.16</domain>
+		<domain includeSubdomains="true">115.124.125.153</domain>
+		<trust-anchors>
+			<!-- Trust system certificates -->
+			<certificates src="system" />
+			<!-- Trust user-installed certificates -->
+			<certificates src="user" />
+		</trust-anchors>
 	</domain-config>
+
+	<!-- Debug override for development -->
+	<debug-overrides>
+		<trust-anchors>
+			<certificates src="system" />
+			<certificates src="user" />
+		</trust-anchors>
+	</debug-overrides>
 </network-security-config>
